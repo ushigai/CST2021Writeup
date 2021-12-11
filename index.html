@@ -1,0 +1,1838 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/serif.css">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+
+<section><h1>CST2021 CTF解説</h1></section>
+
+<section>
+	<section><h2>You cannot see it!</h2></section>
+	<section>
+		<h3>問題文</h3>
+		<p class="fragment fade-up">「~question/you_cannot_see_it!/see_it.txt」というフラグが書かれたファイルを見てみよう。しかしこのファイルは書き込みも読み込みも実行もできない。どうしたらフラグを入手することができるだろうか？</p>
+	</section>
+	<section>
+		<h3>みてみよう</h3>
+		<pre><code .bash data-line-numbers="">user01@raspberrypi:~/question_files/you_cannot_see_it $ cat see_it.txt
+cat: see_it.txt: Permission denied 
+↑ 権限がないといわれている！
+		</code></pre>
+	</section>
+	<section>
+		<h3>読み込み権限の付与を行う</h3>
+		<pre><code data-line-numbers="1|2-4">user01@raspberrypi:~/question_files/you_cannot_see_it $ chmod u+r see_it.txt
+user01@raspberrypi:~/question_files/you_cannot_see_it $ cat see_it.txt
+CST{There_was_no_authority}
+user01@raspberrypi:~/question_files/you_cannot_see_it $</code></pre>
+	</section>
+</section>
+
+<section>
+	<section><h2>Gorilla Virus</h2></section>
+	<section>
+		<h3>問題文</h3>
+		<p class="fragment fade-up">ファイル「~/question_files/gorilla/gorilla」のmd5のハッシュ値を調べよう。</p>
+	</section>
+	<section>
+		<h3>md5sumコマンド</h3>
+		<pre><code data-line-numbers="">user01@raspberrypi:~/question_files/gorilla $ ls
+encoded_flag  gorilla  gorilla.sh
+user01@raspberrypi:~/question_files/gorilla $ md5sum gorilla
+0b7cc67bb2f76c0acfebb7d204d7032b  gorilla
+user01@raspberrypi:~/question_files/gorilla $</code></pre>
+	</section>
+</section>
+
+<section>
+	<section><h2>Challenge Crypto!</h2></section>
+	<section>
+		<h3>問題文</h3>
+		<p class="fragment fade-up">CTFにはCryptoという暗号分野に関する問題がある。簡単な暗号化には文字コードによる変換がよく用いられる。ファイル「~/question_files/Challenge_Crypto/encoded_flag」はフラグをROT13→Base64の順でエンコードしたものである。ファイルを復号してフラグを入手しよう。</p>
+	</section>
+	<section>
+		エンコードを元に戻すにはデコードすればいい
+	</section>
+	<section>
+		<h3>Linuxの場合……</h3>
+		nkf, trコマンドでデコードできる
+		<pre><code data-line-numbers=""></code></pre>
+	</section>
+	<section>
+		<h3>ツールの使用</h3>
+		hogehoge
+		hugaemon
+	</section>
+</section>
+
+<section>
+	<section><h2>moving!</h2></section>
+	<section>
+		<h3>問題文</h3>
+		<p class="fragment fade-up">Linuxではファイルの圧縮にzipではなくtar.gzを使用することもある。ファイル「~/question_files/moveing/flag.tar.gz」を解凍してみよう。</p>
+	</section>
+	<section>
+		<h3>解凍方法</h3>
+		<pre><code data-line-numbers=""></code></pre>
+	</section>
+</section>
+
+<section>
+	<section><h2>new potato</h2></section>
+	<section>
+		<h3>問題文</h3>
+		<p class="fragment fade-up">「~/question_files/new_potato/potato」を見てみよう。ファイルの中の文字列は「file1」をとあるハッシュ関数でハッシュ化したものである。そのハッシュ関数を特定し、同じハッシュ関数で「file2」のハッシュ値を求めよう。</p>
+	</section>
+	<section>
+		potatoの中身
+	</section>
+	<section>
+		sha512でやる
+	</section>
+</section>
+
+<section>
+	<section><h2>Animal_OTAKU</h2></section>
+	<section>
+		<h3>問題文</h3>
+		<p class="fragment fade-up">私が好きな動物を当ててみてください！コマンド「nc localhost hogehoge」を実行してみよう。サーバファイルは「~/question_files/Aminal_OTAKU/server.py」にある。</p>
+	</section>
+	<section>
+		とりあえず実行
+	</section>
+	<section>
+		サーバファイルを読む
+	</section>
+	<section>
+		添字に対応する動物を検索する
+	</section>
+</section>
+
+<section>
+	<section><h2>how_more</h2></section>
+	<section>
+		<h3>問題文</h3>
+		<p class="fragment fade-up">linuxには「file」コマンドというファイルの種類を調べるコマンドがある。「~question_files/how_more」を見てみよう。そこにはたくさんのファイルがあるが1つだけ仲間外れのファイルが存在する。ファイルコマンドを使用してそのファイル名を特定しよう。</p>
+	</section>
+	<section>
+		すべてのファイルに対してfileコマンドを実行する<br>
+		「すべてのファイル」と指定するには「*」が便利である
+		<pre><code data-line-numbers="1,4">user01@raspberrypi:~/question_files/how_more $ file *
+apple:     ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=783fef72e04a80c317a287755359428f33799d15, for GNU/Linux 3.2.0, not stripped
+chrome:    ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=783fef72e04a80c317a287755359428f33799d15, for GNU/Linux 3.2.0, not stripped
+element:   ELF 32-bit LSB shared object, Intel 80386, version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux.so.2, BuildID[sha1]=321579fa46112fe8dde23d9b27cb74f84afab0ba, for GNU/Linux 3.2.0, not stripped
+excellent: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=783fef72e04a80c317a287755359428f33799d15, for GNU/Linux 3.2.0, not stripped
+hoge:      ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=783fef72e04a80c317a287755359428f33799d15, for GNU/Linux 3.2.0, not stripped
+huga:      ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=783fef72e04a80c317a287755359428f33799d15, for GNU/Linux 3.2.0, not stripped
+mail:      ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=783fef72e04a80c317a287755359428f33799d15, for GNU/Linux 3.2.0, not stripped
+mango:     ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=783fef72e04a80c317a287755359428f33799d15, for GNU/Linux 3.2.0, not stripped
+MONDAI:    ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=783fef72e04a80c317a287755359428f33799d15, for GNU/Linux 3.2.0, not stripped
+name:      ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=783fef72e04a80c317a287755359428f33799d15, for GNU/Linux 3.2.0, not stripped
+nice:      ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=783fef72e04a80c317a287755359428f33799d15, for GNU/Linux 3.2.0, not stripped
+number:    ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=783fef72e04a80c317a287755359428f33799d15, for GNU/Linux 3.2.0, not stripped
+orange:    ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=783fef72e04a80c317a287755359428f33799d15, for GNU/Linux 3.2.0, not stripped
+photo:     ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=783fef72e04a80c317a287755359428f33799d15, for GNU/Linux 3.2.0, not stripped
+piyo:      ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=783fef72e04a80c317a287755359428f33799d15, for GNU/Linux 3.2.0, not stripped
+Qulacs:    ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=783fef72e04a80c317a287755359428f33799d15, for GNU/Linux 3.2.0, not stripped
+room:      ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=783fef72e04a80c317a287755359428f33799d15, for GNU/Linux 3.2.0, not stripped
+twitter:   ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=783fef72e04a80c317a287755359428f33799d15, for GNU/Linux 3.2.0, not stripped
+user01@raspberrypi:~/question_files/how_more $</code></pre>
+	</section>
+</section>
+
+<section>
+	<section><h2>Obstructive string</h2></section>
+	<section>
+		<h3>問題文</h3>
+		<p class="fragment fade-up">ファイル「~/question_file/Obstructive_strings/file_S」を開いてみよう。そのファイルにはフラグがあるはずだが、邪魔な文字列「x」、「y」、「z」が存在する。邪魔文字列を処理してフラグを読み取ろう。</p>
+	</section>
+	<section>
+		<h3>問題ファイルを見てみる</h3>
+		<pre><code data-line-numbers="">user01@raspberrypi:~/question_files/Obstructive_string $ cat problem.txt
+yxxyzzyyzxxyzzyxxxzxxzzxzxzyyxzyzzxzzxzyyyzzzyxzyyzxzyyyxxzxxzxxzyzyxyxyxxyzzxyyyzzxyzzxyxyyyxxzxxyxyxxxxzzzyxxyyyyyzyyzyxxxzxzyyxxxyzxzxxyzxyxyxyyyyxxyzyyzxxyxxxzzxxzyyzxxxyyxzyyzxyzzxxxxxyyzyzyzzxzxzxxxyzxxzzxyzyzxzxxyxzxyyyxyyzyxzzzyyxyyzyyzyxzxxyxyzyzyzyzyzxxzzxzyzyxyyyxzzxxxzyyzxzyzyyxzyyyxzxyzyyzxzyxzzzxxyzyzzyyxyxyxyyxyyxyyxxxyxyzyyyzyyxyyxxzyzzxzyyzzzxzyzzzzyxzyyyyzxyyzyyzyxzxxxxxyzxyyzzzxyyzyzxxyyxzzzzxzzyxzyzyzyzxzxzzzyyzxxxzzzxyxxzyyxxxyyzyxxxyzzzyzxyzzxyyzyxzzzzzxxyzzyyxxyxyzzzyzyxxzyxxxzyyzxzyyyxzzzzxxzxyxzxzyxzzFyxzyxyxxxzxzyxyzxxyxzxxxxzyyyyxyzzzxzzxzzxxzyxyzyyzzxxxzzzyzyyyzxxyxzxzyxxyzyyxyxyzxxyzxzzzxyyyyyxxyzxyzzxxxxxyxyyzyyyyxzzzxzxyxzzxyxzxzyzzxzzyyyyzzyzzyyzzzzyyzyyzzzyyxzxyyxxxyxxxxyzzzyyyyxxxxxxyxyzzyxxyyyxzzxyyyxzxzxzzxyyzyzxyxxyxyzxyxxxyxyxzyzxzzxzzzyzxzyxxyxxyzzxzxxzxyyxzzyxzzzyyxyzyxyzxxxxxxzxzzyyxxxxyxyzzxyyzxyyzxxzyyzyxyxzyxyyxyyxyyxzzxyyyzyxyyzyzyxxxzyxyzxxyxyxzzyyzzzyxyzzzyxzxyzyyyyyxxyzyzzyxxxxzyyyxyyxzyyxyyyxzyxzzyyzzzxxzzxxyyxxyzyyzzyzzxyxzyxzyzzzzyzzyzyxyyzzyzxzxxyzyxyzyxzyyzxxyyxyzyyxyyyxzxzyzyzzyxzzyzyyzzzzxyyxyxxxzyxxzyyzyyxzzyxzzyxxzzxxzxyyzxzzxyzxzxzzlzzzxyxyxzzxxzzzyzyxzyyxxxxzzxzzyyzxxyzzzzyzyyxxzxzzyyyxxyyzxyzyzyzzyyzxxyxxyxzyzzyyxyxzxzyzzzxxzxyxyyzzyzyzxxxxzxzxzzyyyxxxzxxzxxxyxxzyyyzyxyxxyyyxyyzxyyxyzzzyyxxzyzyxyyxzyxxxxzxyyzyxzxxxxxxyzyyxyxzyyyxyzyzzzzzxyzyxzzxzxzzyzzyzyyxxzyzyzxxyyyxzyyyxzyzyyyxxzzxxyyzyyxxxzxzyyxyzzyxzxyzxzxyxxxzzyzzxzyyxxzzxzxyyzxyyzzyxzzyzyxxzyzxxxzxxyyxzxzzyxyxxzyyzxyyxxyyxxzxxyxzzzzxyyzzyxzzxzzxyzyyzzzxxxzxxyyzxxxzzyzxxyyxxzyzzyyyaxxzyzxyxxzyzyxzxxyyyzzzyyyyyxzxxyzxyxyzzxzxyyyxxxyyxyxxyyxzyzxyxyyyzzyzyzxyxzyyzzxxzxxzyyzxxyxxyyzyzyyxxzyxyyyxyzyzyzxxxzzzzzzxzyxzyxzzzxxzzxxxyxxzzyxxxxxyyyxzyyxxzzxyxyyzyzzyzxyzxyxxyyzyxxyzyyxzyxzxzzyyzxyyzxyzxxyxzzzzxzxxyzzxzyzyyxzyzyxyyzxxzzyyxxzxyzzxzyxzzyxzzxyyzyxzyyyxxzyxzzzzzyxzzyyyzzxxzxxzyyzzyxxzxyxyxzyxzzxzxxzzxzzyyyxyxyzyxxzxxyxyyyyzyxzzzxzyyzxxzzzxyzxyxzyyxzzzxzyxyxzyxzzyxzyxxxyxxyzxxxxxzzyxzxxzzxyzzzxxzxxyyzxxxzxxyyzxxxyxzzxyxxxyyyyyyyyxzzzyxxxzyzzzxzzyzxyzyyxxyxxzxxyxyzzxyxyyzyzxxxxzyxzxyzxxyxxzyzyxxzxzxxxgzyzzzxzxzyxxxzzzyxxyxxzyxzyzyzxyyyxzzzyyxxyyzzyyxxzxyxyzzyzxxyxzyzzzxxzyyyzzzxxzzxyyyxzyzzxyxxzzxyxzzzyxyxyyxyyyzyyzyxyzyxzzzyxzzzyzxxxyxxzxxxzzyxxxzzyxyxxzxyyyzzzxyxyzxyxyzxzxxyxxzzxzyyyyyxzzxxyzxyzxxyzzxzyyxzzyyxyyzyyzzxyxxzzyxxzzyyxyxyxxyzxyyyzyzzxzxzyyzzzzzxxyyzxzyxxxxzyyxzxzyyxxyyzzxyyxyxxyzzxxxyzyyyxxxyxxyyzxxyxzxxzyyyyxyyyyyzyzxzzzxxxyyxxxzzzyzzyxzxzzyyxzxzzzxyzyxyxzzzxxyyzxzzxzxzyyzyyzzyzxzyzxxyxxyyzxxyzzxxxzzxyxzzzxxxyyyxyzyyxzzxzzxzyzzyxyyzyyxyxxyyzxzyzyzzxyyzxzzyxxxxzzxxyzzyyxxxxxxxxxx_zyzxyxxxzyyxzyyyzzyzxyyzyyxzyyzzxxxzxyxxzxzyyxyyzyxxxyzxzyzxzxxxyzxxyxyxzyxzzyxyxyxzxyyzyxxzxyyzyyxyxzzyzxyyzxzyzyzyyzzxxxxzyxyzyxxxzyyyxxzyxxxxxyzyyxzzyzyyyyyzyyyyyzyzyzyxzzzyzyxzzyyxxzxxzxyxxzyzxxzzyyzxzxzxzxxyyyxzxzyxxxyxzyzzxzxzzzxyxyxzzyyyxxxxxyyzxxxyyyyzxzxxzyzzzxzzyzzxzyxxyzxxzyyyxyxyyxxxzyzyyxxzxyyzyzyzyzyyyzxzzyxxxzyxxyzzyxyyyyxyxzzzyzzxxyyzzyyxyyxyyxzxzxzxyyzyzzxxzzxxyzyxyzzzxxzxxxzzxxzxxyxzyyzzyxyzxyzxzxyxzzxxyzyyyxzyyxyyyzyxzzxyyzzzxxzyxxxyxyxxxyyzzxxzyzzxyxxzzyxzyzyyxxyzxyyyxyzyxyyyxyxyyxyzzzxyzzzxxyxyzzyzyyyyxxxxzzzyxzyzyxxxzzxyyzxzxyxxxzxzyyyyyyizzyyzyzzzyyyyzzxyzyxzxyyxzzxxyxyxxxzxxyzzzxzyyyxyyxzyyxzyxxzxxxyzxyzyzxxzyyxyzyxxxzyyxzxxyzxxyyzyzxyxxzxxyzzzxzyyxxzzyzyyyxxyzxxzxyyzzzxxxzxyyzyxzyyyzzzxxzxxyzyyzzyyxyzxxxxxzxxzyyzyxzzyzyzyzzyyxyxxyzyyzyyzzzxyyzyyxzxxzxxyzxzzxyzzzxyyyyxyxxxyxzzyzxyzyzzxyzzxxyxzyyxzzzxxyxxzzxyzxxzzyzxzxzyzxyyyyxzyxzxxyxzxyyxzxyxxxxxzyxzyzzzyyyyzxyyxzzzxzxxyzzyxxzyzzxyxzzxzyzzzzzxyyxxxzxzxyzxyyxxxyzzzzxzzxyxzzyxxyxzxyxzxyxyzzzxyzyxzxzzzxxyxxzzxzxzyxyxzyzyzxyxzyxxxzxzxzzzxyzzxxxyxyzzxyxxzxyxzxxxzzyxysyxzxzzzxyzxzzyzxxzxxxxxzzxzzyyyxyxyzyzzzzxxyzzyxxxxzyyxzyzxxzzzyyyyxyzxxyzyyxzzzxxyzxyxyzxyyxyxxyyxyzyxyyzzxyyxxyzyxxxzxzxxxyzzyyzyyxzzyxzyzzxxxyyyzyxxyyyyyzzzyxxyzxyxyxyyyxzyyxzxyxzzyzzyzxzxxyzxxyyzyxyxyxxxxyyxxzyyyxyxxyzzzzxxxxxxxyxzxzxyzyzzxyzzyzyyyxxzxzzyzxyyxyzxzyxzxxzyxyzxzxyxzyzzyzxzxyyxzxyzzxyyzxyxyxyxzxzxzyyxyxzxyzzzyzyxzzzyzyyyyzzzzzzzzzyzzyyzxzzyxyyzzxyxxyyyzyzzzzyzzzyxyzyxzyzzyzxyyzzzyxxyxxzyxyxzzzxyyzxzzxxyyyyxxyyxxzzzxyxxzxyxzxyzyzyyzxzzyxxxxxxyzyzxyxyxyxzyzxxx_zxxxyzxzxyzzyzyxzyyxyzzzzyyxzzzzzzzyxxyxxzzxyxzxyxzzzzzxzxzzzyyzxxzzzzxxzyxyzzyxyzzzxxxyyyxxyyyzzxzxxxzxzyyzzzzyzzxzyyxyyyyzxzyxyzyxxzyxxyyyxxxxyyxxxxxyyxxzyxxxxyyzxyxzxyyyxyxyyxzyxxxzyzzxzxxxxxxzxzyzxxxzzyyxyxzzyzxyzxyyyzyyyyxyyzzzyyyyzzxxxyyxyyyxzyyzxxyxyzyxxzyzyzxzyyxxzzyzyzzyzyyyxzxzxzxxzxxzzxzzzyxxxzzzxxyxzxzyyxyzxyyyxzzyyyxzzxyyzzyzxyzyyzxxyxyzyxzzzxxyzzzzzxyxyyxyzxxyxxyxzxzzzyxzzyyzxxxzxyyyxxzzxzyyxxyzzyyxzyxxzzzzyyzxyzxxzyxxzyyyyxzxzzzzyyzyyzyzxzCzyyxxzzzyxxxzxzxxzyyzxzxzyxzxxxyyxzxzyxxxxyyxzzyyxyzxzzyzzzzyzxyzzzyyyxzxzyyzyzyxxzxyyyzyzxzzyxyxyxxyzyyxxxzyyxzyzyxxzzyzzxzyyxzzxxyyzyzzyzxxxyyzyyyzyyxxyxzxxzzzzxxxyzzzyzxzxyyyxxzyzzyxyzxyzyzxxzzzyxyyxxyyzxzyyxzxzyzyzyzzxzxyzyyyzyzzyxzxxxzyzzyyzxzxyxyyyxyzxzzyxyzxzxxxxxyyzxyzyzzzyxxzxxzzxxxyzzxyzxzxzzxxyyxxxxxyzyyzzxyxxxzxzyxxyzzzzxyyzzxxxyxzzyyyzzxxyyxyyxxyxzzzzyyyxxxxyzyzzxyyxyyzyxyyyxxzxzzzyzxzzyyxzzxxyyyyxxxyyxyxxyyzzxxyyxyzxyxxxzzyyyyyxyzzzxzzxzxzyzxxxxxzzzyyzzyzyyxyyyyyyyzzyyyyxyxyyyyyzxxyyzzxzSyyyyxxzyyyxyzzxxyyzxzyzxyzzxxxzzzyzzzyzxzyyzzzyxyxyyxzzzzxzyzzzzzzzxyzzyxzyzxzzyyzxzzzxyyzzxyxxyxxxxxzzxxxyyzxzzyxyyxyyzzxxzxyyxyzxzyxxxzyzzxxxxyzxzzyyxyzxxzxzxxxyxyxxzzyyxyzyyzzxyxyxzyzxzzyzxxyyyxyzxzxzxzyzxyxzyyxxzxyyzzxzzzzzzyzxxyyxzyyyzzyxyzyxxyzyxyxzyyxyzzzxxxyyxzzxxxxyyyxyxxzzyxxyyyzxzzyxzyyyzzzzyzyzxzzyzzzzzyxyyxxyxxzzxxyyyzzyyzxxxzxzyxyyyzyzzxzyzxxxzxzxxzxyzyzyzyyyzxyzzzyyxzyzyxyxyzyyzzxzzyxyxxxyzxxzxzxyxxyyyzyxxxxyxxzyyzxxzxxxyzxyyzzxyzyzyzzyzzxxxxxzyzxzxxyxzzyzxyzyzyyzzzyxzzyxzzzzzyzyzxyyzzTyxyxzzzyxyzzyzxyxzzzzxyzyxyzzzxyzyxzzxxyxxzyxxxzyyyyyxxxxxyzyxzyxzxzxyxxyzyxzzzzzzzxxyyyxyzxxxxzyyzxxzxyzzyyyzxxxxzxxzyxyyyyyxzxxxzyzyyyxzxyyyzzzxxzxyyyzyzzyxxxzxyyzxyxzxyxyzxxzxxxyyzxxzyxzyxxzyzzyxyxyyyxxzyyyzyxxzyzzzyxxyyxzxzzyxzzzxzxxzyzyzyzzyzyzxzyyxyxyzxzxxxzzxyzyxyxxxyyyzzyxyyzxxzyyzyxzxxyzyxzzxyyzxxxxzxxzyzzzyxxyzzxzxzzyxyxzxyzyzzzyyxzzxyzzyzxyzxzzyyxyyxzyyzyxzxzyzzxzxxxzxyyzxyyyyzyyyxxzxyyyzyyxzxyxxyxxxzzxyyzyzxzxzxzzyxyyxzzyzzxyzxxxzyyxyxyyzzxzyyxzzzyzyxyyyxyzxxzzyyzyyxzzzxxzyzyxyxzxxxyxzzzzxzzzyx{zxzzxzxzzyzxxzzyxxzyzyzzxzxzyzxzyzzzxxyzxxzyzyzyyzyzzyyzxxyxxyzxzxzxyyxxzyxzxyyxyxxxzxyyyxyxxzxxzxyxxyyzxzyzzyzxyzxxyzyzyxzzxxxxxyxzzxxxyxzyzxxzyxzzxxzyzzyxzxyzxxxzzzxzxxyzzxzzyyyyyzxxxxyzzyyxxxxzzzxyyxxxyyzzzyzzzxxyzzxzxzxzxzxyzyxyzyyyxzyzzxzxzxzxxzxxzzzzzyyzxyxyzxyyzyyzzxzzzzzyzzxyxyxxyzyxxyxzyxzyxzxzzxyxxyzyzzyyxxxxzzzyxyxyxxxxzxzxxzyzyyxzzxxzxyyyzzyzxxyyzyxyxzzzzyyzyxyyyyyyxxzyzxyxzxxzyyzyyxxzxyxxzyyyzzzyyxxyyxzzxzzxxyyxyyxxxxzxzzyyxyxxxyyzyyyzxzxzxyxxxxxxyzxyyzzzxxxyxzyxyzxyzxxzxzzxxyyyxyzNzyxzxzzxxzzzzxxxzzxxyyyyyyzzyxzzyxyzxyyyzxyyzyzzxzyzzxxyzxxzxxxzxxzzyzxzyzzxyzzzzyzzxzxzzxzyyxxzyxxyyxzyyxxxxxzyyyzzzzxzxyyxyzyyzyzzyyzzyyyzxxzxxzxyzzzzxxyxzyzxyxxzxyzyyyyzzyzxzyyyyzxyxxyxyxxyzxxyxxzzzxxzyyxzyxzyyyzzxzzxzyxzzzxyzzzyxxxzxyxyzyzxyzzxzyxxyzxzyxxxyzzxzxxzzzyxxyyyyzyyxxzxxxxzxzzzyyyyyzyxzzyyxyyyzyxxxyyzzzzxyzyxyzzzyzyxyxzzxzzyzyyyxxxxxzxzxzyxyzxxyyyzyzxzyxzxxzxxxxzyyxyzxyzxxyxzxzxyxyxzxzzyxxxxxzxzxxxxzyyxyzyyyyzxyyyxxzxxxzxzzxzzOzxzzxzzyzzyxyxyxyxxzxxzyxyzzzxyxyzxxyyxyxzyxxyxyyzzyyyzzzxyxyzzxyxxzxyzyyyyzxzzxzzyyxzzxyxzzyzzzzxyxzyxxzyyxzyzzzyyxxxyxzxxzyxzxxxyzxzzxyyxxzzxzyzzzyyyyyxzyxzzxxyxyyzxzxxxxxxxzxzxzxxxzxxyxzyxzzxyyyyyyxzyzyxxyxyxzzyyzyxxyxzxyxzxzzzxzxyxxyzzxxzzzyxzxxxyyzzxzyxzyyzzyyzyzzxzzzzxxyyzxxyyyzzzzzzyzzzzyzzxyyyyxxyyyzzzzzxyyxyxzxzzzxzxyyxxzzxxyyyzyxyyyyzxyyzxzzzzyxyxxxzzzxzyxxyxxxyxyxyzxyzyyxzxzyxxzzzxxzxxzzyxxzxyzyzxzxxzxxzxyyxzxzzzyyyyxxzyyyxyzzyyxyzxzxxyxxxyxzyzzxyzxxxyxxxzzxy_xyyzzzyyzzxyxxzzxyyzyzyxxyyzxzyyyyxzyxyyzzzzzzyyzxxxzyzzxyzzzxxzxzzxyyxxxzzxzxxzzyxzxxzzyyxzxyxzxyxyyyyyyzyxxxyxxyxyzxxyyzzxzzzyxzzyxyyzzyxxyzzxxzxzzzzyyzxxxyyzzzxyyzzxzxyxxzzyzzxyyyxzyyzzyyzzxxyyzxyxyzzyxxyxxyyzzyzzxxyyzzxxyyzyyyxzzyyzyxyxzzxxxzyyxyyzzzzzyzyzxxzxyyyyyxzyxzzyzyyzxyxzyyzyyyzyyxxyyxzyzyxzyzzxyzyyxyzxyyxyyzzyzxxzyxxzzzyzxzxxyzyzzzxyxxzyzyxxyyyxyyxxxxxzyzxxxxxxyxxxyyxzzyyxyzyyyxzxyyyyzyyyAzzzxzyyyxzzyyxzzxxxyxzyxxxzxyxxyyzzzxxxyyzxyyyyyxyyzxxyzxxxxxzzxxzxzyxyxyxxzxxyzzzyxzxyyxxzxzxyzxzyzyzxyyxxzyyzyxyzyzzyyxzzzyxyxxzxzyxyxyzyzxyyyzyzzzxyzxyzzxyzxzzyzyzzzzyzzzyyyxyzxyxxyyxzxxyyxxxyyyzyyzyzxzxzzxxxyxzyyxzyzyzyzxyzzxyyzxyxyzxxzxyyyyyzxzyzyyxxyzzxzxzyyyzxzyxxzzxxyxzyzxzxzzyzzxyxxyyxzzxxxxzxxxxzzzyxzyyyzzxxzxyxzxyyxzyzzyyxyzyxyzyxyzxyxxyxxzyxzyyzzyyxzyxzzzzxxxxyzyxyxyyyzxyzzxxzxxxzxzyyyyzxxyzyyxyzyyzzyxxxxyzxxzyyxxxzzyyzxxxzxzzxzzzxxyzzxxyxyxzzyyyzxyxxzyyxzxyNyyyzyxxzxyyyyyzzxxxxyxzzxzzyzzzyyyzzzxyyxxyxyzyxxzxxyzyyxyxzzyyxxzzzzxxyxxxzzzyzzzyzyyxzzyzzyxzyxzyzyxzzxxxyzyyxxxxyxyyxxxxxyxxzxxzyxyyyyyzxxzyyzzzxyxyyzzzzyxyzxyyzxxxxxxxzyxxyzxyxxzyyxxzyxxzzzxyyzzzzyxxzxyxxxxxzxxxzyyzyyzzyxyzyyyxzyyzzzxxzyxyxzzzxxxyxxxzzyzzyxxzxyzyzyzzxyzyzzzxzxzzyzyyxyzyyzzzzxyzxyzzzxzyzxyyyzyxyyyyzzxzxyzyzyzxyyxxxxxyxxzyzyzxyxzzzxzyzxxyyyyyyzyxzxxyzyxyxzzxyzyyzzyzyyxzyxyyyxyyyzzyyyzyxyzxzxxxzzxzzzyyzxyxyxzxzzxzyxyxxxzyyzzzzzzzyxyxyxzyxyxxzzxzzyxyxxzxzyyzyxyyyyxyzzzzyxyxyxzzzzxzzxyyyyzzxzxyzzxyzxzyxxxAyzxyyxxyzzxxzzxxxxyxzzyxyyzxzxyzxxyyyxyyzyyxyxxyzxxxzzxyzyxxxzzxzyxxzyxyyxzxxzzyxzzyyxyxzxxxxyyyxxzzxxxyzxyyxzzyzyzzxzzyyyzxzzxzxzzyzyyyxzzzzzzyyzzyzxxyzxyxzyzyzxxyxxzyxyyyyyzyzzzyyyyzzzyzyxyzxyyxzxxyzyxzzzyyxyyzzzyyyxzzxxzyzyyyyyxyyyzxzxzzzzyxzzyxxyxyxyyzxxxxzzxyyxyzzyyzxyzyzzzxzyxxyzyyyyxxxzyxyxxxzzzxyzyxyyyxxyxzzzzzxyzyyzyyzxxzzyzzxzzxxzyzyzyxzyzxxxxzyxzzzzzyzzzyxxzzzzyyzxzyzxyzxyyyxzyzxzxyzyxxzzyzyyyxyxzzxyyxxzyyxzyyyyyxzzzyzzyyxyxxxxyzzzyyyyyyzzzyzyxxzzxxxyxyzRyxyzxxxzxzzxzyxyxzxxzxzzxzxxxzxxzzzzzyzzzxxzzzzzzxzzxzyyyzxyzxzzyyxzzzyxxyyzxyzyzxxzyyzzyyyzzyxyxyxyyzyzyxxxxyyyzzxyxxxzzzyyzyyyxxzyyxzzzzyyyzxxzxxzyyxyzyyyxzyyyyzxyxxyzzxxyxyxyyyyxxxxyyxyzzzxxzyyzzxyzyxxzxyyxzzyzxxxxyzyxxxyyzxzyyzzzxyyyxxyyxzyyyxxyzzzxxyyzzxzzyzyzxxyxzyzyzzxzzxxxyxzzzxxxxxyxzzzyzxyzxxyyyyzxxzxzzxxyyyxyxyxyxyyzzyxyzyzyxxxyyyyzzyxxxxzzxxxyzyyxxxxxzyxzxyyyzyzxyzzzzyxyxzyyzxyyyxyxzyyzxzzzzyxzzxxxzxzyxyzxzxzzzxzzzzyyxzxyyzyxzyzzzxyxyxxxyzyyxyxzzxyyyxzyyzz_yyzyyyyzxyzzyzxzxxzzyxyxzxzzzxyzxxyyzyzxyzxxyzyxxyxxxzxyxxzzzxxxyzxxzyzxyxyxzxyyxzzzxxyxyzzxyzzxzxyxxyzyyyxxyyyzzxzzzyyyzxxzyxxyyyyyzxzxxxzxzyzyyzxxxyyxxxyyxzyyyxxzzzyzxzzxzyzzzzzxzzzzyzzzyyzzzyyyxzzxxyxzxzxxxzxzyxxxyxyyzzyxyxyyzzzyxyxxxzyxzxxxyzxzxxyzyyzzzzyzyyyzxxxxxyzxxxzxzxxyzzyyxyzzzxzxzzzxyxzzzxxyxzzyyzyzyyyxzzzzzzzyyzxyyzzxyyxyxyyyzyxzzyyyyyyyzyyxxzzyxyzzzzzzxzxxzzzzzzxzzyxyyzzxxxyyxyyyxyzzyxyyzyzzxxzxyzyzxyxzzzyxxzxyxzyzzyxyyyyyxxzyyxxyxyzyxxxyxzxCxyzzyzzyyyxyzzxzzxzyyzyyyyxzyyyyxyzyxyyzxyyyxxxzyxyyyzzxzxxxxyzyyyyyyxyzxzxxxzyxxxxyxyzyxyyyxyxyxxxyxzxxzyxxyyxxzyzzzxxyzzzxyzyzyxzzyyxxxxzzzyzxzyyxxyyxyzzyyyzyxyyzzzyzyxzzxxzxxyzzxxyyzzzyxxyxxyxxzyzzzyyyzxzyxzzzxxyxxzzzyzzzzyzyxyyyzyyxzzzzzzxxzyyxxyxxxxyzxxyyzzyyzyxyzyzxyyxxxxzyxyzyyyxzzyyyyzxxyyzxxzzxyzxyyzxxxxzxzzzzyyzyzxyyzxxyzyyzyzxxxxyyyyyzyyxyyyzxzyyzxxyxzzyzzxyyxyxyxzyyxxyxzxxxxxxyzxyxzxyyyyxzyzzzyyHyyyzyzyxxzxxyxyzxxxzzzyyxxxzzzyxxxyyyxxzyyyzzyzzyyzxxyyzxyzzzxyzyyyxyyzxzzzzxyzxzzyzyzxxyyyyyxxyzxxyyyxxxyyyyyxyyzyyzzyyzzxxxyxzzxxyyzxxzxyxyyxyyzxxzyyyxyzzyxzzzyxzxzzxxxxyyxzyxxzyyyxyxyxxzzyxyyzxxzxzxxyzxyyyyyyzyyyzzxzxzyxxxyxzzxyzyzxxzxxzyxxyzyyxyzyyxyyzxzxxyzxyyxyxyzyzxyzxzyxxxxzyzzyyyxzxyxzxyyzzyyxyyyxxyxyzzxxyxzyyyyyxxzzyxyyzyyyzxzzyxyzxzxxyxyyyyxzxxyzyyyzyzxyyzzyzzxzzxxxyzyyyyzxyxyyzzzyyyxxxzyzxzyxyyzxxxxxzxyzzxyzyzyxIzzxxxzzzxyyyzxyzzyyyxyzyxyyzxxyxxzzyzyzyxzxzyzxxyxyzzyyyzxxyyyzyxxxzxyyzxxxzyzxzyyxxyyyyxzxyzyzzxyzzxyxyyyyxyxyxyzzxxxyzyzxzxzxyzzzyzzxzzxyzyzyyyzyxzxzzzyyxzxzzxzyyxyxxyyyzxxzzxzzzzyxzyxxzzyxzyzxyzxzxxyxzyxxzxyyyzxyzyyxzyxzxzzzyzyyxxxxzxxzyzzyzyxzyzzzzyxxzzzxyyxyzzzzyyxzyzxzzxzxzxxzzyxyzyzyyyxzyyyyzyzzzzyzxyzyxxyyxyzzyxxxxxxxzzyyxxxxxyxxxzzxyzzxzxzzzzzxyxyzzyxxyzxyyxzxzxxzyyzzzyzyxzzzxyxzzxyxyyyxxxyyxxyxyzyzyxxxxzyzzyxxzzxxyzyxzxyxyzzzxxzxzzzzxzxyyxzxzzyxxzzxxyxxxyyxyxxzzyzxzzxyxzyyxyzyzxyzxxxxxzyzxxzzzxxzzxxxxzxxyz}zzxxxzzzxyyyzxyzzyyyxyzyxyyzxxyxxzzyzyzyxzxzyzxxyxyzzyyyzxxyyyzyxxxzxyyzxxxzyzxzyyxxyyyyxzxyzyzzxyzzxyxyyyyxyxyxyzzxxxyzyzxzxzxyzzzyzzxzzxyzyzyyyzyxzxzzzyyxzxzzxzyyxyxxyyyzxxzzxzzzzyxzyxxzzyxzyzxyzxzxxyxzyxxzxyyyzxyzyyxzyxzxzzzyzyyxxxxzxxzyzzyzyxzyzzzzyxxzzzxyyxyzzzzyyxzyzxzzxzxzxxzzyxyzyzyyyxzyyyyzyzzzzyzxyzyxxyyxyzzyxxxxxxxzzyyxxxxxyxxxzzxyzzxzxzzzzzxyxyzzyxxyzxyyxzxzxxzyyzzzyzyxzzzxyxzzxyxyyyxxxyyxxyxyzyzyxxxxzyzzyxxzzxxyzyxzxyxyzzzxxzxzzzzxzxyyxzxzzyxxzzxxyxxxyyxyxxzzyzxzzxyxzyyxyzyzxyzxxxxxzyzxxzzzxxzzxxxxzxxyz
+user01@raspberrypi:~/question_files/Obstructive_string $</code></pre>
+	</section>
+	<section>問題文に書いてある通り、<br>x, y, zを消して(置換して)あげればいい</section>
+	<section>
+		<h3>Vimのコマンドを使用する</h3>
+		<pre><code data-line-numbers="">vim
+:%s/x//g
+:%s/y//g
+:%s/z//g
+
+user01@raspberrypi:~/question_files/Obstructive_string $ cat problem.txt
+Flag_is_CST{NO_ANAR_CHI}
+user01@raspberrypi:~/question_files/Obstructive_string $</code></pre>
+	</section>
+	<section>
+		<h4>pythonを書く</h4>
+		<pre><code data-line-numbers="">f = open("./file_S", "r")
+s = f.read()
+s = s.replace("x", "")
+s = s.replace("y", "")
+s = s.replace("z", "")
+print(s)
+		</code></pre>
+	</section>
+</section>
+
+<section>
+	<section><h2>Strong_Password</h2></section>
+	<section>
+		<h3>問題文</h3>
+		<p class="fragment fade-up">あなたはアプリ「~/question_file/Strong_Password/checker」にログインするためのパスワードを忘れないように、「password.txt」に保存した。さて、ログインすることはできるだろうか。</p>
+	</section>
+	<section>
+		<h3>checkerを実行させてみる</h3>
+		<pre><code data-line-numbers="1|2|3">user01@raspberrypi:~/question_files/strong_password $ ./checker
+Enter password > hogehoge  ← 適当に入力してみる
+Incollect...
+user01@raspberrypi:~/question_files/strong_password $</code></pre>
+	</section>
+	<section>
+		password.txtにパスワードがあるらしいが……<br>
+		めっちゃ長い。
+	</section>
+	<section>
+		<h3>パイプラインを使用する</h3>
+		password.txtの中身を直接checkerに渡せばいい
+	</section>
+	<section>
+		<pre><code data-line-numbers="1|2-3">user01@raspberrypi:~/question_files/strong_password $ cat password.txt | ./checker
+Enter password > Collect!!!
+CST{TheLongerPassword,TheBetter!!!}
+user01@raspberrypi:~/question_files/strong_password $</code></pre>
+	</section>
+</section>
+
+<section>
+	<section><h2>Language journey</h2></section>
+	<section>
+		<h3>問題文</h3>
+		<p class="fragment fade-up">「~/question_files/language_journey」の中を見てみよう。そこにはそれぞれpython, C言語, shellで書かれたソースコードがある。それぞれのソースコードを適切に実行し、フラグを入手しよう。</p>
+	</section>
+	<section>
+		問題ファイルをみてみる
+		<pre><code data-line-numbers="">user01@raspberrypi:~/question_files/language_journey $ ls -1
+source.c <- C言語
+source.py <- Python
+source.sh <- シェルスクリプト
+user01@raspberrypi:~/question_files/language_journey $</code></pre>
+	</section>
+	<section>
+		それぞれ適切な方法で実行してあげればいい
+	</section>
+	<section>
+		<pre><code data-line-numbers="1-3|4-6|7-9">user01@raspberrypi:~/question_files/language_journey $ python3 source.py
+Flag part of 1/3.
+CST{Java,C++,H*************************}
+user01@raspberrypi:~/question_files/language_journey $ gcc source.c -o source; ./source
+Flag part of 2/3.
+CST{**********TML...WhereSha***********}
+user01@raspberrypi:~/question_files/language_journey $ bash source.sh
+Flag part of 3/3.
+CST{************************llWeGoNext!}
+user01@raspberrypi:~/question_files/language_journey $</code></pre>
+	</section>
+</section>
+
+<section>
+	<section><h2>絶対に負けられない戦い</h2></section>
+	<section>
+		<h3>問題文</h3>
+		<p class="fragment fade-up">あなたの友人はじゃんけん（英語でRock-Paper-Scissors）のアプリを作った。じゃんけんアプリは「~/question_file/Rock_Paper_Scissors/」の「App」で、そのアルゴリズムは同じディレクトリ下の「App.sh」に書いてある。じゃんけんアプリに勝利してフラグを入手しよう。</p>
+	</section>
+	<section>
+		実行してみると……
+		<pre><code .bash data-line-numbers="1-5|6-9">user01@raspberrypi:~/question_files/Rock_Paper_Scissors $ ./App
+Hey!
+Let's play Rock-Paper-Scissors togather!
+Rock, paper, scissors. One two...
+	Type 'rock' or 'paper' or 'scissors'
+You:rock
+AI:paper
+YOU LOSE!!
+user01@raspberrypi:~/question_files/Rock_Paper_Scissors $</code></pre>
+		必ず負けてしまう
+	</section>
+	<section>
+		<pre><code data-line-numbers="">#!/bin/bash
+
+echo "Hey!"
+echo "Let's play Rock-Paper-Scissors togather!"
+echo "Rock, paper, scissors. One two..."
+echo "     input 'rock' or 'paper' or 'scissors'"
+
+read -p "You:" human
+
+rock=$(cat ./Data/Main/Assets/aaa)
+paper=$(cat ./Data/Main/Assets/bbb)
+scissors=$(cat ./Data/Main/Assets/ccc)
+
+if [ $human = "rock" ]; then
+        echo "AI:$paper"
+        if [ $paper = "paper" ]; then
+                echo "YOU LOSE!"
+        elif [ $paper = "scissors" ]; then
+                echo "YOU WIN!"
+                echo "Flag is CST{}"
+        elif [ $paper = "rock" ]; then
+                echo "DRAW!"
+        fi
+elif [ $human = "paper" ]; then
+        #snipped
+elif [ $human = "scissors" ]; then
+        #snipped
+fi</code></pre>
+	</section>
+	
+</section>
+
+<section>
+	<section><h2>u-pa-ru-pa-</h2></section>
+	<section>
+		<h3>問題文</h3>
+		<p class="fragment fade-up">ぼく、生まれ変わったらウーパールーパーになりたいんだ。ファイル「~/question_file/u-pa-ru-pa-/u-pa-ru-pa-」を実行してみよう。</p>
+	</section>
+	<section>
+		<h3>実行してみる</h3>
+		<pre><code data-line-numbers=""></code></pre>
+	</section>
+	<section>
+		ファイル実行時の応答を全て書き込む
+	</section>
+</section>
+
+<section>
+	<section><h2>どこでもDirectory</h2></section>
+	<section>
+		<h3>問題文</h3>
+		<p class="fragment fade-up">どこでもDirectoryが「~/question_files/DOKODEMO_directory/DOOR」にあるらしい…</p>
+	</section>
+	<section></section>
+</section>
+
+<section>
+	<section><h2>AandBand...</h2></section>
+	<section>
+		<h3>問題文</h3>
+		<p class="fragment fade-up">ディレクトリ「~/question_files/AandBand.../」の中を見てみよう。そこには「original.txt」ファイルと「chall」ディレクトリがある。さらに「chall」ディレクトリの中には「file_0001.txt～file2000.txt」2000個のファイルがある。この2000個のファイルの中で1つだけ「original.txt」と同じファイルがあるらしいが特定することはできるだろうか。答え方：CST{file_○○○○.txt}</p>
+	</section>
+	<section>
+		同じファイルを特定するには
+		ハッシュ関数がとても便利
+	</section>
+	<section>
+		<pre><code data-line-numbers=""></code></pre>
+	</section>
+</section>
+
+<section>
+	<section><h2>X_file</h2></section>
+	<section>
+		<h3>問題文</h3>
+		<p class="fragment fade-up">ファイル「~/question_files/X_file/JPEG_FILE.jpg」を見てみよう。ファイルはJPEGファイルのようだが、ファイルシグネチャが壊れてしまっているらしい。ファイルシグネチャを復元し、表示することはできるだろうか。</p>
+	</section>
+</section>
+
+<section>
+	<section><h2>shelf_chef2</h2></section>
+	<section>
+		<h3>問題文</h3>
+		<p class="fragment fade-up">「~/question_files/shelf_chef2/chall/」を見てみよう。そのなかに大量のファイルがあるが、ファイル名に「file」と含むものだけを削除することはできるだろうか。削除したら「~/question_files/shelf_chef2/check」を実行しよう。</p>
+	</section>
+	<section>
+		<h3>lsしてみると、</h3>
+		<pre><code data-line-numbers="">user01@raspberrypi:~/question_files/shelf_chef2/chall $ ls
+06Oq9KciYmLEsj                  Jfile
+06UCfile                        Jfile3RZss
+0aggfileC7f                     jfileHn8wE
+0DJ3HZQ1uzJJpL1CWvgn            jfileOZvu
+0DNiZuvknWbMsiXZCfMQWeua2er11   JHREVuGh
+0file                           JJwxd46AuWZ2iH
+0filek2                         JLfile
+0LpiDh0dFlupVzBzTNYaJFJDEBL7    jlrfileztJ7v
+0xomPEgapznfVuV                 jLrjp38uo
+0z7Yz                           jMPVNliNISzpIluHAUaQzW
+10iGBV27fr3h                    jMXb83Oku6Qp
+13bfileXGdF                     JnfileRu
+15sRedR                         JNJbGLyRzKueTARSLTRqk90
+16pufile9C21                    jNwzfjXAt
+1F8TzMGmzsxxSaslrVjxP2          jofilex
+1filekr                         JP8XL0gMvPkbqlv4c0Egc1
+1Jfile74                        JthNBkn
+1KzyPpe                         jtpAifileP1
+1LHfileVXVX                     JTTDVHN3ZFNYgdkGKjz
+1mfileGALbg                     jUErGLvrSSEqX
+1N1nUzIlmjxKqPQUy               JVoyWUJV7pjdSleA3ls23950Ap
+1NlVfilekav                     JvqahOGlQcEOsvPz67xnGLWofmA
+1qaNRd1DbE3N3Ir7                jWeeFm2VMQP4muCSTLeVEbhHxRF
+1RVqxfileNdWZd                  k56IRj08r6SGkeyd9cwX
+20lKjHyylY14EW                  k5file3fkmz
+24F1c3nmRxrS982qRwgBF           Kala7LhfWZ6V
+297GIfileu6s                    Kbs9n6yQs
+2Ffile                          KbXnfileYSeU
+2file                           KbZ1Efile
+2GzIGLHG                        kCjjDwj
+2HMfileSH                       KcOVfUry85I7
+2ukC4soNghP7hLH1RYOMKSc         Kfile0ZZ
+2WlvIJG                         kfilekpT
+35eYsD9Vr1fYwMxhyaChRu          kg3fileV
+36gfxY                          kGF9QjM3MkouF2jKbHGeex
+3ABYJaXmj2oMDPOPFmsML9QmN       kiW8file0hM
+3BQXJfileZ                      KKfilerTjP
+3fZuG7KnAhBuFHQp1BH             Kki3Ufiled
+3MfileEVAs                      KKmK0srWbofC004323fU7W4oWm2
+3N2fileLX                       kP2TzL31J
+3rWYfilee9H3                    KPNXv2
+3S4aiyCWNrNtfFT5TLbrifR8Nq      Kr3sTqFzWelVxxVEWxik5
+3sWJrYL1GirTaU6b                KUxQbsrVY6dZf
+3WOfile1JJ                      kwR0Jg1uq3WolK496cO9eQ7f
+3WXsGrY7Usmno                   kxfile
+3YeDzX20no48NbD4PI3czW3O5qT35   kz0XMfilef3p
+44POfilevY2z                    l02VPgwbPDEEOF0myVPt0
+44tLHfileiHX                    L1QDYYF91exmUXL
+46file2TXY                      L4nuWfileqG6M
+47db9                           l5DCfileGNz
+4fileUD7Qk                      LAW0YJzJAiDB65x5Vw
+4IUuFQTIVHLQjKjYhHhd854nDzWLh   lcb2efile6q3
+4Kfile                          LDltMmnxCJ
+4LDJg6                          lec1filegc0
+4qp2LKUFPpme1ZUzwUWnwfPy6g4ZL9  lEL5zAoSXj4wmcl
+4wdBfileP4                      LEu7QbWrU8kKNwH8s1NRP
+4xV8QhJtLMBYSQy4SvAXyn9PIzO54   LfileN3k
+5a4qefiledjJY                   lfilepexD
+5b5VmscLQKAsvqv7U7              LfileVt
+5dfileO4                        lfileyQJl7
+5dVBM                           LfileZl
+5ERucip7XtRk                    LFWfile
+5filePewW                       LgbAfile
+5filey                          lgSfile4vs0
+5ldFgrE84rieyKo                 LgSYfilekAbU
+5NVBbRP8iFOle70N                LiF399GFCRC1EbxsEbBtbxtT53V
+5Oqtdue3qdgOCXL0krbC49mOvpo     liwi5UJv8N2V
+5VFEfilebj                      Lk6G5av
+5YkxPT4ptTMeqO9FpHhrza          Lp8kh6rw8BTyzjEmqk8JyP
+60gfiles33                      Lq8file
+64fileFue0                      LS5HKhSdGcKaFdKufuOE381GaJ08dO
+68G0UerC0VLHzPkbsx5Ew2N         luWDrfileVkPv
+6AfileG                         LylVq9IOEGdTr37vDSKg2qBpjU
+6file                           m0Qa8361Th5pLLdhkoefa946DWsYm
+6GzX40O3yk                      m2NRR3mY20a
+6Qfile                          M9d5ffrV5nX1zXwaapJ07PB
+6RAfile                         MakeFile
+6SvDEX3Q5vAK7QHwMz              mBalWiDX3iEB9vQ3agEV
+6ZLMvbL                         MBLWbSXOk6pdxXYrlSxcO4Rbq
+79TEGOG78wn0xhWi99VomnuNey9iA   MewhmFUrq0F
+7EGu7F783tjfACjlMw              mfileM
+7eOfileB                        MfileuB
+7hyYQU6AMS5mykwDs               MGGWFJsTPjAPhgDLkACrCro4zvNXy
+7I5j9gysj                       mGqKTBAXiapfJRSmxF88rQnVV
+7lvlNF8PZbrIJp9PM               mhfileC
+7m8iXEWUzZ3N                    miYvYObh42IMDMqwoD136jwwQ4CO
+7MGRga7ff1zCs                   Mjqp6MAlkqT2ZIpkpbIV
+7MrT1XNwQUQL5Q294iSuyNuUY       mKBhKnj4RmT8OJNqavi2hB2Gy
+7OfileLAy                       MMfNXfilecPaTh
+7RJfI5ZvpE9RjBSk5b              mN5X7CW3dLreee
+7vcyfileJh                      MofileRXH6G
+7XPVS1qfcMbjUWlzTRAggnWk3ARto   mpGHr1NY26O2k
+80Qpq6Kc                        mSdnffile
+84If9PPMwF3vU                   mtfileNOM
+8ANXfileC                       mumaHwRyufG4YmH
+8DZUlsr                         N6cJ1S5bncdg32qJHbUIzpP0hB
+8fileUcdq                       N9woyaUmraeWRGJjZBjnKaNCWDZ1kf
+8g9Aj2kLe10guSORQxi             nBifilejE
+8m5ADGgKJ97XPFxX2tzdKyM7C2Q     NcDac3cciGG
+8mVXIPR1CFB7PBLuW6GU            Nefile
+8P4gnpO5xmwfNOtO                NgrWqHQHdBY6gAIBiFDJbQ
+8qf2file0Mi                     NJ0rVPRdwAtgOG2txw
+8qfilex6A                       nMGStfileK
+8T1hQUV2vRAARzkc4eDhZEXuuDUK    NN455xukSEbtumz7u
+8tHsT66zcHwrbBh                 nqfile
+8uF3filekeG                     Nu8otP8YSfI3tf9Rk1iSLuH4m
+8vOaLcWdkHZ                     nVfile
+8XUf9bwor6egOuVCjiT             NvMRoNnFeAFgNJaJYAtfgVxZ
+97CDfileCwKF                    nWCadIQ
+98sPfilePOWEP                   nYufilea
+9atfile2D                       o0file6oRg
+9ba9krz8                        O0lkfile7Lb
+9CofileCndUf                    O8gKeGxgbao5gxm95jqfDOC75yTxa
+9file3Qs                        o9UHoZu6vt52yb2aXBc0NkxyqGdb
+9HyqfileYWb                     oaUwO320djK
+9MaqrFjHpYxMVsMGUwWSex          obOorfile0h
+9TgOfilePE                      OBSUuQRJE
+9VpfilevmBf0                    oDPrA3mpYoPnhBvJ42xvfbEhvoJ
+A0XjuqGGHY2vhT35R               ODq4b
+A1o8FF65F                       OGtumfileTPYKw
+a2xAJdJU8lXPI224e               OHH9gRhYc3FGoD
+a7fileQ                         OJbn4igzWz1BAfRx
+A7GS0DxiXRRSKI1i0EjdW8qwAAsF    OJovXM9ohJyl6
+Aaqx7BZMXRV4s58zS               ojZsl1pNOT
+abxMAoznNS1GOxrsAMNgy           omKioaJROWkkj9
+ADa8KfqKv4wti                   Ooc2NNVJoT1EOHHwtAfaNiitp
+Adscolv2SVQ70p26                OPWcE8Ie9oPla
+Aeiizi3PT9JZ8qg63G1NVSvq        OufileEgh
+aHsMFCpqjsYfIbsRuS              oXGZ8kfE6GlLyqveJNrQ
+AhXXCrs9ezxZkbQvZK              OZ2RjfxQ1SGnF6
+aHzkakUGBq4MboI                 oZyUz7Bp6
+aKHcLfileV                      P2OfilecG
+aKyJy                           p55fileO
+ApqIxfileQEJ2                   p5PgZiObMLP3P0
+AT5nmxQNn                       PBfilenH
+aVatfilePmW                     PbfJfileIJC6D
+B0Bl58YXP1Rs                    PfVeEfilefa
+b1jsMM8H9                       pfVH6Vqqcroeb6vBixxCd0pcZb
+bBdW0filetwKaw                  Pg5Tfile5m1J
+bBlfilexYYi                     PgfileDhd
+BCfbrfileO                      PHKK3xzqY
+bEfileX                         pHXuWCt
+bfiler7n                        pI88Pfile
+Bjkfile                         PJeUGipElV2ezZ0WVve
+BJrkAfileN5                     PKWB5pyNu00zyH0gMZ6CK
+BL9file                         pMkjkw58mnxhvx1BT6XrCVJZ
+bLQQx6wm0NOzXn                  PNLkW
+bLvuRZrqBia                     PNvesHHznlMqjxtnzG69t8D5Fvz33T
+bnaUQFwKJQZILPHJ0eaVPEUaAK      Pq6Cfile
+BqbFgGstF                       PqKfile
+bTEn3filegNE                    PtQrNk7xrynNRydcKFqMt5Ol4Y2U2
+Bu5pfileZPot8                   PuGBOF33Pfkr
+bxSjHfileG                      pv1QP5JzqwMIc4ws30H
+BynXifilePL                     pWWOpclql
+BYtw6file                       PyN32gv
+C2WqvfileBgw                    q1KfileRkTE
+C4Kdfile4                       q2bhbNa2Z5E0zl
+c5ThAlHutRAjDHz8Ur5ZQcoI1zR     qAFbWLZTfXlP52UzpN4F8DsaJt7
+c5XifileuD                      QaRIKAklUQ1jY4ntQx
+C6WjMoCRLzsN3QQSyve             QbbezB5GBA1
+c7file0Wl                       QcCOfileUB
+C8ZjBdYt9kBlYFk                 QCffile9a2U
+C9Enyfile9Y                     qcLlh3xCiNPhP
+cA58fileLmOF                    Qd3Ntfilezx
+CAtBoGPKp0ponaZ8Jkx             qfileARx
+CaUYyfile0AccA                  qfileLM1
+Cb3j9file                       qfileZ
+ccfile                          qFu8sSVZ0hH
+cCgjfilecs9                     qgHpgyyVXH2q4
+CD3V7file9P                     QGLiD
+cdfileiYHO                      qifile4
+cdTazYiSTmUg86ToW3FJ            qjm74kM
+CiGBACm0f                       qJUFsZCWIO5XN
+CNksUhQ6                        QlS07Q8tolw2nsgxeCt1v
+cqEsodIaZAQvZXQ0RqD1DNKqF       qO5filetwaL
+cRfilejFMf9                     QQOCPcrVvUfAOGG05QMx5YNVy9
+cSHtm                           qqOsoOYLALEKkDwWgV6dWdb
+CTfPyHWBhRTnBxPDvg              Qrfiley
+cu2fileXpU                      QrOi4BlDHAV9M5ib
+cvy6YqtbOvWNSFTkwQxde0dWi0olf   qsifileYKU48
+CWafilebuvY                     qsTCrDaA6Ywse62foMZayzyK
+cwoYu5QPfs9S0lbHuI              qtNLu7FS0fKYdAyxl
+cxJ1afilem                      quAj3fileyLOaP
+cYc3je1G9A                      QUaufileWC
+CzSJppDuA5QkdqxqK3fWhY          qXfile6wM
+D2bRfile8eE                     QYfileiLA5
+D2fileCNspW                     Qyk96EEjirby9dx2pk7sIgaPw0
+D7Dfilewggn                     R0m5AhPFockIFZqrogAeTC
+DbAfU8lg0z                      r3Ckl6xrWU
+DBxzfileAi                      R3ZqptBKC
+De5W3OZskhYVS5gzf               r7UKuhv7INKFtDs3qhdkEd4W3LDPT4
+dEazfileQA                      R8flFuF95Q0GB0Uxfs
+deiKwoUtyFFTPd0LcCAtGiSxxD4cC   rcCWPfile1
+dffileL                         rcrfiled6
+dfilea4a4                       rDaifilerC8Ck
+dfileanzs                       rdBxD1c6TqUQcWbUvXpf83f1X
+dfiletwob                       rDG7SfileQkdv
+dfileVeGh                       RDhXst8JX0iUeueKE3de21
+DgpPQfilepsot                   Rdyp8wE0RdTfHvJDaEIDXWc7A
+dhiHfileB3T                     rfileq
+dhusZfilefm9                    RFZm2MRzoAQHxFdNIs4
+DkE6fileAu                      RHXUi1CP3PsqouSvhrppEr
+DkR6n0CBGXevhIXI3fxfrOcIskMGST  RKkFDZlIpC
+DL4UaJO3nDgUQMKtOPI             RkQPu
+DM8L7pOh5Z5X7M03iS7JKPWxDNoXP   Rl8WodDNYsttD
+Dngl3                           rllbRfile4I
+dnrMfileXmfJT                   rmLcUfileVjZ
+DP61W1Kog7C6FgHs                RmXiJH2cDYipEyy2zZ49YUhpv3U
+DTfilej8OMY                     rOsHQfilee35
+dufilef                         RRrtrj1DlWNH3FCzxb2rjxXQX
+DwMKfilezLKlz                   rtIydclUZDDfnCLZq7Cg6
+dxTJLQ67ps98                    rTZW1u
+DZPXfileP                       rUxo81OOnU
+E0msCkqDBvpTAU04wRM27Q          Ryxfile7
+e6gfileVq                       S0fileTV
+E6s13fileG                      s0yji8IZnPwFPoELkAs2H5
+E7ekDucCYDnHwmnxyS              S7puDzwvzWS
+E8fileQh                        sencGAcEhs4EBwdGtTcVvvUXG
+E9bfBJnXnLi6k                   sfile
+eaz747KCC                       sfile1cW79
+eBpvDv0BT4bcnEGZb               sfileGJ
+efile                           SfileHM
+efileBQLg                       sHtY40RWdUkZzSSqBup6Tx4TivfkP
+EKOsoJOsWU8q0O                  sI5fileg21BJ
+ELbi5LNEqrd8ylyLFky             SQ7zwWh6y3ae4aAYJBcpKJxgbEpaE
+EltZfileOtM9C                   sQcZnfileBFr
+ep7jEfileJBT                    Sqfile4oks
+EPfilej                         SQTrfile6j903
+EqWiBdfP0Psp3ahqj1mdwj          SVPqY7AqBMx2LTMXyBptemnBL2VQU
+ERQSrKdneWUWjPrKJ               SxI2uuAGeYoZpopGMV0TCt9nV
+EVeR7aJ                         sY0yfileU0krK
+EVyt2xV9Lvn                     sZZfile
+ewfilezDhYV                     t1M0NNu8
+F1xwsd8jnPKUeP                  t1PxufileF
+F5aNAGBqRCRJHu8R                t4VlKQsnv6xwztH
+F8du4file                       T68YM9O3bXbIq7ihw0RBHwmf9bC
+fAMd7uEXuHdwdrawFevHMq6JFwlVeh  TBVo0teT
+fanfileECkD                     Tchseh
+fCwUxVpY4kCEmR                  Tfile
+FeejiU1zux4XdXxL2               tfileHeA
+ffEQfileQbK                     TfileOw
+Ffile                           TFjXNVKh6TvlQOVGyWmhLAITu
+Ffile5nI                        tgHXfile
+Ffileb505f                      tlAQdFdM3KyTEcoKzOM
+ffilecv                         tLfileThN
+ffileUVM                        TPteEmUVplZkymfPAOZz07R
+FhYJzHkT4vU                     tQ24ifileqkQ2f
+file                            tqxTuuiABx6gkWaF2UbxNaFPlE
+file0v9FQ                       trfile
+file0z                          TsFuNIZOl1N
+file2B7e                        TuPk67n9dTUNb
+file2L4                         TvCNy7FohVTIyOc8N
+file4                           tX7Zfile
+file4Y                          TyCFI96qacqASle1GSJpbTHoDEaP
+file6ech                        U099FwTaY67HNWeFvu5nv8bC2
+file7                           u1CcLkab
+file844w3                       u1Gfilethgj
+file89MD                        U5td4yvjOIYVBwWwmBclDyaFYytWo
+file8G                          U8PoshYeGVa6S2mSRlE
+file9                           u8XOfileWY6T1
+fileaEE                         UAvYfcv1e8SYrswpRFqpJ
+fileALh1                        ucGo3SVGoQqlSO9PIR63mfCYsVfwr
+fileArBg                        UdxjfileZNZ2
+fileB                           ufilePlM7F
+fileDS                          Ufilezq
+filedVn                         Uhfilec6Wl3
+fileDW                          uhfilei1Xn
+fileGWKH                        ULb9file
+fileiKvs4                       Ulfilehd
+fileIS3                         ulsfileTZsi
+fileixCB                        uMPXpilhwMAZptoBaJgAWTh
+fileJ                           uMtEh9zK8BUEkJeS
+fileJf                          uNmSVfileiXQL
+fileJjIiw                       urso6file2ZR1
+filejKIzc                       UsDvHoLX
+filel9sKv                       uSzfile1hL
+filelB                          UTGVp3XMP36
+fileM9qs                        UVPhyfileqi
+filenL                          uXPJ5fileAtVv
+filepC                          uye6file3
+filerC                          uyPXKfileE
+filerZaZ                        uzT5x0IwlmqLLaeJAZroAo5fQbz5T
+filet1bkH                       V35zqLizVmDwRfA5F2yMgDj3tHy
+fileT7F3L                       V4fileEAP
+fileTjT                         v5sXUJpoOpNg7
+fileU                           V7fileAO9c
+fileUcc                         v8W1Mfilef
+fileuOp                         vBLQ2DaoxrVHCwQPEkhQva
+fileUuQNU                       VC3tY5gD6
+filev                           vCuHjfilenUY
+filev6r                         Vfile7Y2
+filewyD                         vIOTj1xd2G6CLb
+fileX6P8D                       vj2file
+fileXm                          vkfileHY4
+filey1HG                        vKvElhlY3My
+filey5Ryy                       Vmwscfilef4
+fileYQtGy                       vooBPHbi8MKC6tW2jptDpJ
+filezS                          vQAZH0bS2Xbb8USPEQ
+FincnBhHh5MhioYVgUZg8pYKhYxVI   vqsOfileY6fk
+fIZHfile                        vsGDXCFYsfEbvbcjqyv4Mb
+fLq2f5bhM7aEe0NOxjeRfc          vSWbbjj5R9Vr79WfBoD3NwYGO
+FQafile6etiF                    Vt4tC5qLSgvqfzykc
+fRgfile                         VwW9EwRJ1JlLF0k0uFtmoSdYPxx
+FS9sfile                        vX0HnUePVmIogjiMwM14nq9
+fSUZcSzUctKyo9PlCIcNxQ4m        vXN0MHPOzg7l3NPxT7
+FvQsfileqS                      VXsVfileXJJg
+FWMWnEkZ2P0Vypd                 Vync53meEH8S
+FXEIfileeF                      w1L95mVYEZl4zDyaWq5cmrA8gwe9h
+fXwfile                         WEtHSxl0LAF0dSWMQooEvDcz
+FYDdED                          wfC4y8
+fyDVAwzED4DvMWG8A33NL9Y8        wfiler
+G1quh02jrtSZuja                 WHYjfileRnjx
+g26N8JqxTAvO4HauhpR             wIOyGFk6YKx1ioa50HSMhQm1UNf
+G4fileuda                       wjtTbzizDMz
+g79JYbhIAOopBOa                 wlLc695s0vwMnY3kps8kzr6VyU
+ga2xfile                        wmZqWwf0LaiwsagGh56VoXUPlL
+gcIKk0ucBRMNFjA2pJxhk4125xhITY  WS3pKb
+gCpU4JetW2uigQdN                WVeIfileKn
+GDfilerwhY                      wvNE6rlFPaLr
+gEnJey58QZHQTw8xbS4FPLzG        wwmuknGin5
+geowxAxOB78IuGxaYrFTU0M0LKH     wYLARHaiBOYYZ
+GeSo0hmr                        X3J2kfile8
+GexJ9HyJBZUO1wc6J               XaiFfileUSw
+gfileC                          XdbMfile5SGs
+ghMq6b8035D4Jbqxar4             xdkGfileoHw6W
+GiFIfileKKANM                   XEJmQtOrrcHx757I
+gJtnWxmbJGaDq                   xEls3l
+gJWnafileP                      XEufile2JV1b
+gkedbpknEqNBC1gU2               xf27hwaOD2Gb1gYB
+gkigmJ5TCfH6FfpQ                xfileI
+GNC7U85qJTczrywluoTSyZf8N       xfilekf4
+gncOhpPRoDWfOza1ZKUK            xfileZTD
+GnME5Wqiaxm8e8l382z8rB6VQywI    xFIzw9
+Gq9AQKL1kDqT6i5eh               xFV12Br0RZJgn9pkt
+GRq0filee                       xghp19Ca7H4LfzRSAqotW55BZugD
+GrUGTqz0hvNgz5rSET              xGPjICeXiw3uci
+gT0cPfileEOAax                  XHfilew
+GtaifileL                       XHmlOpYTWaxV33oags6cEWI7oqtgL
+gvoNfA678zLetImZSYTbGaD         xIb9QaVfzoo5TVeMaBhy6VEVy3a
+GzK8file3                       Xm2rDruxf2LJmf8Z1VhPAvMdqvJ
+gzkqavS4q                       XmfileGpiw
+H8Sy6XIiiq9HDsl                 xMhUF2nDIEjw
+hafileI9fW0                     xnf2sSEkH181xPPztaF
+HaIfileU                        XoNJlmF4xcduy1YIHDzTmHu11mocwB
+hanp4file                       Xpfilea
+hBtDaXNmCB                      xqm5fileE
+HD0fqPrj0ENczS                  xRyfileosm
+hDL4Bb61wDggVD                  xuWufileG
+hDpfileHku5                     xvqcWF1nhAzdENCof
+HDrxfileE7                      XznmlAjLxdD
+hEfQptd2H8W7qTsGIiUp2zywTDwQVv  y200file7hiU8
+hewgxfilehMtp                   y3ofile7LK
+hfile58                         Y5ZOpfilecDS
+HfileI                          Y6FtGxtq47ikLdiY4eljCs1hz6OiB
+HFW7xYijk9gQkk9j75kX4Mv         Y6y74iinoBe
+hHpdlx48g9f5IEMSl7of6mBM        y81IFN7IQuZgejECKUAQ5
+HIYrfvH9UL1DWm                  Y8jfile
+HjfilelXqA5                     YBb5cX7IecrQO29GjIcvrDZ
+HjRO320lGkgIH8x                 YbxjTfileOjH
+hkSdI4HiDbj4FYBAkJVT            yfile3
+Hl9ffile7A                      Yfile5rKR3
+hljB72WS1zgIfmNOrsozohL5        YfileT
+HM0MfileONV                     yfmAfileVcOJd
+Hs9QOG3DGZoqo7KkVYR8lorUQ       YfnMwJJf4e2H
+hsk1TdyT8AILNKq9ZWlfAKtidxQp2F  yFWcfileRqR
+hvNg28VHgTNgExORzUDShL9A        yG6OYLZAGkEsow9NTtbOq
+HxErwfileNWZ6o                  yGf3Xfile5b
+hXlTLAFUOwhZJulJKll             YIV96rQ
+I0v3fileptFg                    yML65UGmTALgdcjzD73V1xNg967
+IaPzCfilepE                     YnEmfileRzjym
+iBngfileG4pL                    YOxfG
+Id1filejVzm                     YpPLuknl9WU3GNOMuriVslpat0uZ4q
+iFfilez4G                       yS5Cq
+Ifile                           YUAqfileFKKYJ
+IGczqHu7pZQbO7V8A8jeUUo         yYEtpqwab
+IGxe8K3hl                       yYJrdlkF6iOk9sVZTcETRiO
+iHfile                          Z0THfile
+IHn8iS7tXOsPplyXACKiBP0         Z7z6file
+iiQd9file                       zaDZX9cxjh9s
+ikPTjfileC                      zBKIRAzVkt8rCVvLfSreCyRGEnu3fG
+iMs0LfileZZPB                   ZfgpCPnEjpApRdp5fesRPRvZHObyjp
+isWJfileM                       zgOoQieP
+Iszfile                         zIfileyn
+IszwMjAD8EaErmgPQhYk            ZK9xI0sFQlsYXnU
+It0ApOk7chSxL1ZlBz              zKGIEKA5Mw2VHR3WpjGEDT
+iwn1MyKd9GMSABMpCKT08ghOo       zL5MNnn7A1cRJ
+IYDSCwGbwLU34FvI                zLSs9rYObnU
+j2Lofile19t                     zOSKr5jZw
+j3GTfileZK8                     zryp8x8YFgAc51al7EwH0uv1wO
+j8ENcafkuKa6JJQjVC8bhx7srX      ZsBopfileMdj
+j9Whfilew                       ZSSfilef7ay
+JbMproTSdvaye5YjCIwwmdw         zTPnNRzBHO2nla
+JCPW80cHMiiIDkDPV7RUGqB0R       ZvJ6dlfQBdxuQ3RvcX
+jefileK47Uk                     ZX01N9ZPMObBX
+JeLpsTeHKDIhkv98
+user01@raspberrypi:~/question_files/shelf_chef2/chall $</code></pre>
+	</section>
+	<section>
+		fileという文字列を含むファイルを削除するには正規表現が便利である
+	</section>
+	<section>
+		rmコマンドと正規表現の併用
+		<pre><code data-line-numbers="">user01@raspberrypi:~/question_files/shelf_chef2/chall $ rm *file*
+user01@raspberrypi:~/question_files/shelf_chef2/chall $
+		</code></pre>
+	</section>
+	<section>
+		あとはcheckerを動かすだけ
+		<pre><code data-line-numbers="">user01@raspberrypi:~/question_files/shelf_chef2 $ ./check
+-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+モードを選択してください
+[c] : challのチェックを行います
+[f] : challを初期状態に復旧します
+[q] : プログラムを終了します
+ > c
+正解です！
+CST{IWishWeCouldGoSomeWhereLikeThis!}</code></pre>
+	</section>
+</section>
+
+<section>
+	<section><h2>Are_you_smart?</h2></section>
+	<section>
+		<h3>問題文</h3>
+		<p class="fragment fade-up">Are you smart?ファイル「~/question_file/Are_you_smart/checker」を実行してみよう。</p>
+	</section>
+	<section>
+		checkerを実行してみる
+		<pre><code data-line-numbers="">user01@raspberrypi:~/question_files/Are_you_smart $ ./checker
+Q1/10000
+1 + 501 = 502
+Q2/10000
+1 + 502 = 503
+Q3/10000
+1 + 503 = 999  <-  間違った答えを入力すると
+The answer is wrong...  <-  プログラムが終了してしまう
+user01@raspberrypi:~/question_files/Are_you_smart $
+		</code></pre>
+	</section>
+	<section>
+		問題の出題傾向にはパターンがある
+		<p class="fragment fade-up">あらかじめ問題の答えを作成すればいい</p>
+	</section>
+	<section>
+		shellで作成
+		<pre><code data-line-numbers="">#!bin/bash
+
+echo "" > answer
+for i in {1..100}
+do
+    for j in {501..600}
+    do
+        ans=$(($i+$j))
+        echo $ans >> answer
+    done
+done</code></pre>
+	</section>
+	<section>
+		<pre><code data-line-numbers="">ans = ""
+for i in range(1, 101):
+    for j in range(501, 601):
+        ans += str(i + j)
+        ans += "\n"
+
+f = open("answer", "w")
+f.write(ans)
+f.close()</code></pre>
+	</section>
+	<section>
+		あとはanswerの内容をcheckerに渡せばいい
+		<pre><code data-line-numbers="">user01@raspberrypi:~/question_files/Are_you_smart $ cat answer | ./checker
+Q1/10000
+1 + 501 = Q2/10000
+1 + 502 = Q3/10000
+
+~~  中略   ~~
+
+100 + 598 = Q9999/10000
+100 + 599 = Q10000/10000
+100 + 600 =
+
+CST{JustMemorizeTheAnswersAndYou'reGoodToGo!}
+
+user01@raspberrypi:~/question_files/Are_you_smart $
+		</code></pre>
+	</section>
+</section>
+
+<section>
+	<section><h2>Uho! Uho!</h2></section>
+	<section>
+		<h3>問題文</h3>
+		<p class="fragment fade-up">マルウェアに感染によってフラグが暗号化されてしまった。解析によって暗号化アルゴリズムは、同じディレクトリ下の「~/question_files/gorilla/gorilla.sh」であることがわかっているが「encoded_flag」を復号し答えよ。</p>
+	</section>
+	<section>
+		<pre><code data-line-numbers="">user01@raspberrypi:~/question_files/Are_you_smart $ cat encoded_flag
+UhoUUUhohoU
+UhohoUhohoUU
+UhohoUUUUho
+UhohoUUhohoho
+UhoUhohohohoho
+UhohoUhoUUho
+UhohohoUUhoho
+UhoUhohohohoho
+UhoUUUUhoho
+UhoUhoUUhoho
+UhoUhoUhoUU
+UhohohohoUhoho
+UhoUUhoUUU
+UhohoUUhoUho
+UhohoUhohoUU
+UhohoUhohoUU
+UhohoUhohohoho
+UhoUhohohohoho
+UhoUUUhohoho
+UhohoUhohohoho
+UhohohoUUhoU
+UhohoUhoUUho
+UhohoUhohoUU
+UhohoUhohoUU
+UhohoUUUUho
+UhohohohohoUho
+UUUUhoUhoU</code></pre>
+	</section>
+	<section>
+		gorilla.shを確認してみる
+		<pre><code data-line-numbers="">user01@raspberrypi:~/question_files/gorilla $ cat gorilla.sh
+#!/bin/bash
+
+
+#<<<<< STEP1 >>>>>
+xxd -b CST_flag > tmp
+touch encoded_flag
+mv tmp encoded_flag
+
+
+#<<<<< STEP2 >>>>>
+S=$(cat encoded_flag)
+S=(${S//   /})
+for i in $(seq 0 1 $((${#S[*]} - 1)))
+do
+        s=${S[$i]}
+        if [ ${#s} -eq 8 ]; then
+                echo ${S[$i]} >> tmp
+        fi
+done
+mv tmp encoded_flag
+
+
+#<<<<< STEP3 >>>>>
+for count in $(seq $(cat encoded_flag | wc -c))
+do
+        sed -e "s/0/U/" ./encoded_flag > tmp
+        mv tmp encoded_flag
+        sed -e "s/1/ho/" ./encoded_flag > tmp
+        mv tmp encoded_flag
+done
+
+
+user01@raspberrypi:~/question_files/gorilla $</code></pre>
+	</section>
+	<section>
+		<p class="fragment fade-up">STEP1 : フラグをxxdコマンドで2進数ダンプ</p>
+		<p class="fragment fade-up">STEP2 : xxd出力の邪魔な文字を削除</p>
+		<p class="fragment fade-up">STEP3 : 0をUに、1をhoに置換</p>
+	</section>
+	<section>
+		復号には……
+		<p class="fragment fade-up">アスキーコード変換をする必要がある</p>
+	</section>
+	<section>
+		pythonだとchr関数で可能
+		<pre><code data-line-numbers="">cipher = open("encoded_flag", "r").read()
+cipher = cipher.split("\n")[:-1]
+
+for c in cipher:
+    c = c.replace("U", "0") # Uを0に戻す
+    c = c.replace("ho", "1") # hoを1に戻す
+    print(chr(int(c, base=2)), end="") # アスキーコード変換
+
+print("")</code></pre>
+	</section>
+</section>
+
+<section>
+	<section><h2>traceee</h2></section>
+	<section>
+		<h3>問題文</h3>
+		<p class="fragment fade-up">わたしをトレースしてみてください！ファイル「~/question_files/traceee/chall」を実行してみよう。</p>
+	</section>
+	<section>
+		実行してみる
+		<pre><code data-line-numbers="">user01@raspberrypi:~/question_files/traceee $ ./chall
+Enter password : hoge  <-  適当に入力すると
+Wrong password!  <-  不正解と言われる
+user01@raspberrypi:~/question_files/traceee $</code></pre>
+	</section>
+	<section>
+		パスワードの検証に何かしらの関数が呼び出されてる可能性がある
+		<p class="fragment fade-up">プログラム内部の呼び出し関数を調べる</p>
+		<p class="fragment fade-up">ltraceコマンドが便利</p>
+	</section>
+	<section>
+		ltraceコマンドでchallを調べてみる
+		<pre><code data-line-numbers="">user01@raspberrypi:~/question_files/traceee $ ltrace ./chall                                                        11:19:20
+printf("Enter password : ")                           = 17
+__isoc99_scanf(0x7f22e9b11016, 0x7fffca70ecd0, 0, 0Enter password : hoge  <-  適当に入力
+)  = 1
+strncmp("hoge", "excellent_password\260\351"\177", 18) = 3  <- strncmp関数で比較している
+puts("Wrong password!"Wrong password!
+)                               = 16
++++ exited (status 0) +++</code></pre>
+	</section>
+	<section>
+		パスワードがわかったのであとは入力するだけ
+		<pre><code data-line-numbers="">user01@raspberrypi:~/question_files/traceee $ ./chall
+Enter password : excellent_password
+Collect!!!
+Flag is CST{YouAreExcellentTracer!!!}
+user01@raspberrypi:~/question_files/traceee $</code></pre>
+	</section>
+</section>
+
+<section>
+	<section><h2>shelf_chef</h2></section>
+	<section>
+		<h3>問題文</h3>
+		<p class="fragment fade-up">「~/question_files/shelf_chef/name_list.txt」の中を見てみよう。その中にあるfile_○○という文字をそれぞれファイル名として「ans」ディレクトリの下に作成してみよう。（ファイル作成が終わったらcheckerを実行させよう）</p>
+	</section>
+	<section>
+		すべてのファイルを一括で作成するには
+		<p class="fragment fade-up">前の実行結果をtouchコマンドに全て渡す必要がある</p>
+	</section>
+	<section>
+		実現にはxargsコマンドが便利である
+	</section>
+	<section>
+		コマンド
+		<pre><code data-line-numbers="">user01@raspberrypi:~/question_files/shelf_chef/ans $ cat ../name_list.txt | xargs touch
+user01@raspberrypi:~/question_files/shelf_chef/ans $</code></pre>
+checkerの実行
+		<pre><code data-line-numbers="">user01@raspberrypi:~/question_files/shelf_chef $ ./checker
+ファイル作成を認識しました！
+CST{ThatWillBeEnough!}
+user01@raspberrypi:~/question_files/shelf_chef $</code></pre>
+	</section>
+</section>
+
+<section>
+	<section><h2>READ_only_READ</h2></section>
+	<section>
+		<h3>問題文</h3>
+		<p class="fragment fade-up">地下に秘密基地を作りました！ファイル「~/question_files/READ_only_READ/chall」を実行してみよう。</p>
+	</section>
+	<section>
+		strings, ltrace, straceでフラグが入手できない
+		<p class="fragment fade-up">逆コンパイルしてみる</p>
+	</section>
+	<section>
+		objdumpコマンドを使用してみる
+		<pre><code data-line-numbers="">user01@raspberrypi:~/question_files/READ_only_READ $ objdump -d chall
+
+chall:     file format elf32-littlearm
+
+
+Disassembly of section .init:
+
+00010334 <_init>:
+	10334:       e92d4008        push    {r3, lr}
+	10338:       eb000026        bl      103d8 <call_weak_fn>
+
+	~~ 中略 ~~
+
+0001048c <main>:
+	1048c:       e92d4800        push    {fp, lr}
+	10490:       e28db004        add     fp, sp, #4
+	10494:       e24dd040        sub     sp, sp, #64     ; 0x40
+	10498:       e3a03065        mov     r3, #101        ; 0x65
+	1049c:       e50b3008        str     r3, [fp, #-8]
+	104a0:       e51b3008        ldr     r3, [fp, #-8]
+	104a4:       e6ef3073        uxtb    r3, r3
+	104a8:       e2433022        sub     r3, r3, #34     ; 0x22
+	104ac:       e6ef3073        uxtb    r3, r3
+	104b0:       e54b3040        strb    r3, [fp, #-64]  ; 0xffffffc0
+	104b4:       e51b3008        ldr     r3, [fp, #-8]
+	104b8:       e6ef3073        uxtb    r3, r3
+	104bc:       e2433012        sub     r3, r3, #18
+	104c0:       e6ef3073        uxtb    r3, r3
+	104c4:       e54b303f        strb    r3, [fp, #-63]  ; 0xffffffc1
+	104c8:       e51b3008        ldr     r3, [fp, #-8]
+	104cc:       e6ef3073        uxtb    r3, r3
+	104d0:       e2433011        sub     r3, r3, #17
+	104d4:       e6ef3073        uxtb    r3, r3
+	104d8:       e54b303e        strb    r3, [fp, #-62]  ; 0xffffffc2
+	104dc:       e51b3008        ldr     r3, [fp, #-8]
+	104e0:       e6ef3073        uxtb    r3, r3
+	104e4:       e2833016        add     r3, r3, #22
+	104e8:       e6ef3073        uxtb    r3, r3
+	104ec:       e54b303d        strb    r3, [fp, #-61]  ; 0xffffffc3
+	104f0:       e51b3008        ldr     r3, [fp, #-8]
+	104f4:       e6ef3073        uxtb    r3, r3
+	104f8:       e243300e        sub     r3, r3, #14
+	104fc:       e6ef3073        uxtb    r3, r3
+	10500:       e54b303c        strb    r3, [fp, #-60]  ; 0xffffffc4
+	10504:       e51b3008        ldr     r3, [fp, #-8]
+	10508:       e6ef3073        uxtb    r3, r3
+	1050c:       e2833003        add     r3, r3, #3
+	10510:       e6ef3073        uxtb    r3, r3
+	10514:       e54b303b        strb    r3, [fp, #-59]  ; 0xffffffc5
+	10518:       e51b3008        ldr     r3, [fp, #-8]
+	1051c:       e6ef3073        uxtb    r3, r3
+	10520:       e2433004        sub     r3, r3, #4
+	10524:       e6ef3073        uxtb    r3, r3
+	10528:       e54b303a        strb    r3, [fp, #-58]  ; 0xffffffc6
+	1052c:       e51b3008        ldr     r3, [fp, #-8]
+	10530:       e6ef3073        uxtb    r3, r3
+	10534:       e283300f        add     r3, r3, #15
+	10538:       e6ef3073        uxtb    r3, r3
+	1053c:       e54b3039        strb    r3, [fp, #-57]  ; 0xffffffc7
+	10540:       e51b3008        ldr     r3, [fp, #-8]
+	10544:       e6ef3073        uxtb    r3, r3
+	10548:       e2433011        sub     r3, r3, #17
+	1054c:       e6ef3073        uxtb    r3, r3
+	10550:       e54b3038        strb    r3, [fp, #-56]  ; 0xffffffc8
+	10554:       e51b3008        ldr     r3, [fp, #-8]
+	10558:       e6ef3073        uxtb    r3, r3
+	1055c:       e2833003        add     r3, r3, #3
+	10560:       e6ef3073        uxtb    r3, r3
+	10564:       e54b3037        strb    r3, [fp, #-55]  ; 0xffffffc9
+	10568:       e51b3008        ldr     r3, [fp, #-8]
+	1056c:       e6ef3073        uxtb    r3, r3
+	10570:       e54b3036        strb    r3, [fp, #-54]  ; 0xffffffca
+	10574:       e51b3008        ldr     r3, [fp, #-8]
+	10578:       e6ef3073        uxtb    r3, r3
+	1057c:       e243301d        sub     r3, r3, #29
+	10580:       e6ef3073        uxtb    r3, r3
+	10584:       e54b3035        strb    r3, [fp, #-53]  ; 0xffffffcb
+	10588:       e51b3008        ldr     r3, [fp, #-8]
+	1058c:       e6ef3073        uxtb    r3, r3
+	10590:       e54b3034        strb    r3, [fp, #-52]  ; 0xffffffcc
+	10594:       e51b3008        ldr     r3, [fp, #-8]
+	10598:       e6ef3073        uxtb    r3, r3
+	1059c:       e2833007        add     r3, r3, #7
+	105a0:       e6ef3073        uxtb    r3, r3
+	105a4:       e54b3033        strb    r3, [fp, #-51]  ; 0xffffffcd
+	105a8:       e51b3008        ldr     r3, [fp, #-8]
+	105ac:       e6ef3073        uxtb    r3, r3
+	105b0:       e2833007        add     r3, r3, #7
+	105b4:       e6ef3073        uxtb    r3, r3
+	105b8:       e54b3032        strb    r3, [fp, #-50]  ; 0xffffffce
+	105bc:       e51b3008        ldr     r3, [fp, #-8]
+	105c0:       e6ef3073        uxtb    r3, r3
+	105c4:       e2433026        sub     r3, r3, #38     ; 0x26
+	105c8:       e6ef3073        uxtb    r3, r3
+	105cc:       e54b3031        strb    r3, [fp, #-49]  ; 0xffffffcf
+	105d0:       e51b3008        ldr     r3, [fp, #-8]
+	105d4:       e6ef3073        uxtb    r3, r3
+	105d8:       e243301c        sub     r3, r3, #28
+	105dc:       e6ef3073        uxtb    r3, r3
+	105e0:       e54b3030        strb    r3, [fp, #-48]  ; 0xffffffd0
+	105e4:       e51b3008        ldr     r3, [fp, #-8]
+	105e8:       e6ef3073        uxtb    r3, r3
+	105ec:       e243303e        sub     r3, r3, #62     ; 0x3e
+	105f0:       e6ef3073        uxtb    r3, r3
+	105f4:       e54b302f        strb    r3, [fp, #-47]  ; 0xffffffd1
+	105f8:       e51b3008        ldr     r3, [fp, #-8]
+	105fc:       e6ef3073        uxtb    r3, r3
+	10600:       e2833011        add     r3, r3, #17
+	10604:       e6ef3073        uxtb    r3, r3
+	10608:       e54b302e        strb    r3, [fp, #-46]  ; 0xffffffd2
+	1060c:       e51b3008        ldr     r3, [fp, #-8]
+	10610:       e6ef3073        uxtb    r3, r3
+	10614:       e54b302d        strb    r3, [fp, #-45]  ; 0xffffffd3
+	10618:       e51b3008        ldr     r3, [fp, #-8]
+	1061c:       e6ef3073        uxtb    r3, r3
+	10620:       e2433023        sub     r3, r3, #35     ; 0x23
+	10624:       e6ef3073        uxtb    r3, r3
+	10628:       e54b302c        strb    r3, [fp, #-44]  ; 0xffffffd4
+	1062c:       e51b3008        ldr     r3, [fp, #-8]
+	10630:       e6ef3073        uxtb    r3, r3
+	10634:       e54b302b        strb    r3, [fp, #-43]  ; 0xffffffd5
+	10638:       e51b3008        ldr     r3, [fp, #-8]
+	1063c:       e6ef3073        uxtb    r3, r3
+	10640:       e54b302a        strb    r3, [fp, #-42]  ; 0xffffffd6
+	10644:       e51b3008        ldr     r3, [fp, #-8]
+	10648:       e6ef3073        uxtb    r3, r3
+	1064c:       e2833009        add     r3, r3, #9
+	10650:       e6ef3073        uxtb    r3, r3
+	10654:       e54b3029        strb    r3, [fp, #-41]  ; 0xffffffd7
+	10658:       e51b3008        ldr     r3, [fp, #-8]
+	1065c:       e6ef3073        uxtb    r3, r3
+	10660:       e2433012        sub     r3, r3, #18
+	10664:       e6ef3073        uxtb    r3, r3
+	10668:       e54b3028        strb    r3, [fp, #-40]  ; 0xffffffd8
+	1066c:       e51b3008        ldr     r3, [fp, #-8]
+	10670:       e6ef3073        uxtb    r3, r3
+	10674:       e283300b        add     r3, r3, #11
+	10678:       e6ef3073        uxtb    r3, r3
+	1067c:       e54b3027        strb    r3, [fp, #-39]  ; 0xffffffd9
+	10680:       e51b3008        ldr     r3, [fp, #-8]
+	10684:       e6ef3073        uxtb    r3, r3
+	10688:       e283300a        add     r3, r3, #10
+	1068c:       e6ef3073        uxtb    r3, r3
+	10690:       e54b3026        strb    r3, [fp, #-38]  ; 0xffffffda
+	10694:       e51b3008        ldr     r3, [fp, #-8]
+	10698:       e6ef3073        uxtb    r3, r3
+	1069c:       e283300f        add     r3, r3, #15
+	106a0:       e6ef3073        uxtb    r3, r3
+	106a4:       e54b3025        strb    r3, [fp, #-37]  ; 0xffffffdb
+	106a8:       e51b3008        ldr     r3, [fp, #-8]
+	106ac:       e6ef3073        uxtb    r3, r3
+	106b0:       e283300f        add     r3, r3, #15
+	106b4:       e6ef3073        uxtb    r3, r3
+	106b8:       e54b3024        strb    r3, [fp, #-36]  ; 0xffffffdc
+	106bc:       e51b3008        ldr     r3, [fp, #-8]
+	106c0:       e6ef3073        uxtb    r3, r3
+	106c4:       e54b3023        strb    r3, [fp, #-35]  ; 0xffffffdd
+	106c8:       e51b3008        ldr     r3, [fp, #-8]
+	106cc:       e6ef3073        uxtb    r3, r3
+	106d0:       e2433001        sub     r3, r3, #1
+	106d4:       e6ef3073        uxtb    r3, r3
+	106d8:       e54b3022        strb    r3, [fp, #-34]  ; 0xffffffde
+	106dc:       e51b3008        ldr     r3, [fp, #-8]
+	106e0:       e6ef3073        uxtb    r3, r3
+	106e4:       e2433044        sub     r3, r3, #68     ; 0x44
+	106e8:       e6ef3073        uxtb    r3, r3
+	106ec:       e54b3021        strb    r3, [fp, #-33]  ; 0xffffffdf
+	106f0:       e51b3008        ldr     r3, [fp, #-8]
+	106f4:       e6ef3073        uxtb    r3, r3
+	106f8:       e2833018        add     r3, r3, #24
+	106fc:       e6ef3073        uxtb    r3, r3
+	10700:       e54b3020        strb    r3, [fp, #-32]  ; 0xffffffe0
+	10704:       e59f01f0        ldr     r0, [pc, #496]  ; 108fc <main+0x470>
+	10708:       ebffff11        bl      10354 <printf@plt>
+	1070c:       e59f31ec        ldr     r3, [pc, #492]  ; 10900 <main+0x474>
+	10710:       e5932000        ldr     r2, [r3]
+	10714:       e24b301c        sub     r3, fp, #28
+	10718:       e3a01013        mov     r1, #19
+	1071c:       e1a00003        mov     r0, r3
+	10720:       ebffff0e        bl      10360 <fgets@plt>
+	10724:       e55b301c        ldrb    r3, [fp, #-28]  ; 0xffffffe4
+	10728:       e1a02003        mov     r2, r3
+	1072c:       e51b3008        ldr     r3, [fp, #-8]
+	10730:       e1530002        cmp     r3, r2
+	10734:       1a00006a        bne     108e4 <main+0x458>
+	10738:       e55b301b        ldrb    r3, [fp, #-27]  ; 0xffffffe5
+	1073c:       e1a02003        mov     r2, r3
+	10740:       e51b3008        ldr     r3, [fp, #-8]
+	10744:       e2833013        add     r3, r3, #19
+	10748:       e1520003        cmp     r2, r3
+	1074c:       1a000064        bne     108e4 <main+0x458>
+	10750:       e55b301a        ldrb    r3, [fp, #-26]  ; 0xffffffe6
+	10754:       e1a02003        mov     r2, r3
+	10758:       e51b3008        ldr     r3, [fp, #-8]
+	1075c:       e2433002        sub     r3, r3, #2
+	10760:       e1520003        cmp     r2, r3
+	10764:       1a00005e        bne     108e4 <main+0x458>
+	10768:       e55b3019        ldrb    r3, [fp, #-25]  ; 0xffffffe7
+	1076c:       e1a02003        mov     r2, r3
+	10770:       e51b3008        ldr     r3, [fp, #-8]
+	10774:       e1530002        cmp     r3, r2
+	10778:       1a000059        bne     108e4 <main+0x458>
+	1077c:       e55b3018        ldrb    r3, [fp, #-24]  ; 0xffffffe8
+	10780:       e1a02003        mov     r2, r3
+	10784:       e51b3008        ldr     r3, [fp, #-8]
+	10788:       e2833007        add     r3, r3, #7
+	1078c:       e1520003        cmp     r2, r3
+	10790:       1a000053        bne     108e4 <main+0x458>
+	10794:       e55b3017        ldrb    r3, [fp, #-23]  ; 0xffffffe9
+	10798:       e1a02003        mov     r2, r3
+	1079c:       e51b3008        ldr     r3, [fp, #-8]
+	107a0:       e2833007        add     r3, r3, #7
+	107a4:       e1520003        cmp     r2, r3
+	107a8:       1a00004d        bne     108e4 <main+0x458>
+	107ac:       e55b3016        ldrb    r3, [fp, #-22]  ; 0xffffffea
+	107b0:       e1a02003        mov     r2, r3
+	107b4:       e51b3008        ldr     r3, [fp, #-8]
+	107b8:       e1530002        cmp     r3, r2
+	107bc:       1a000048        bne     108e4 <main+0x458>
+	107c0:       e55b3015        ldrb    r3, [fp, #-21]  ; 0xffffffeb
+	107c4:       e1a02003        mov     r2, r3
+	107c8:       e51b3008        ldr     r3, [fp, #-8]
+	107cc:       e2833009        add     r3, r3, #9
+	107d0:       e1520003        cmp     r2, r3
+	107d4:       1a000042        bne     108e4 <main+0x458>
+	107d8:       e55b3014        ldrb    r3, [fp, #-20]  ; 0xffffffec
+	107dc:       e1a02003        mov     r2, r3
+	107e0:       e51b3008        ldr     r3, [fp, #-8]
+	107e4:       e283300f        add     r3, r3, #15
+	107e8:       e1520003        cmp     r2, r3
+	107ec:       1a00003c        bne     108e4 <main+0x458>
+	107f0:       e55b3013        ldrb    r3, [fp, #-19]  ; 0xffffffed
+	107f4:       e1a02003        mov     r2, r3
+	107f8:       e51b3008        ldr     r3, [fp, #-8]
+	107fc:       e2433006        sub     r3, r3, #6
+	10800:       e1520003        cmp     r2, r3
+	10804:       1a000036        bne     108e4 <main+0x458>
+	10808:       e55b3012        ldrb    r3, [fp, #-18]  ; 0xffffffee
+	1080c:       e1a02003        mov     r2, r3
+	10810:       e51b3008        ldr     r3, [fp, #-8]
+	10814:       e283300b        add     r3, r3, #11
+	10818:       e1520003        cmp     r2, r3
+	1081c:       1a000030        bne     108e4 <main+0x458>
+	10820:       e55b3011        ldrb    r3, [fp, #-17]  ; 0xffffffef
+	10824:       e1a02003        mov     r2, r3
+	10828:       e51b3008        ldr     r3, [fp, #-8]
+	1082c:       e2433004        sub     r3, r3, #4
+	10830:       e1520003        cmp     r2, r3
+	10834:       1a00002a        bne     108e4 <main+0x458>
+	10838:       e55b3010        ldrb    r3, [fp, #-16]
+	1083c:       e1a02003        mov     r2, r3
+	10840:       e51b3008        ldr     r3, [fp, #-8]
+	10844:       e283300e        add     r3, r3, #14
+	10848:       e1520003        cmp     r2, r3
+	1084c:       1a000024        bne     108e4 <main+0x458>
+	10850:       e55b300f        ldrb    r3, [fp, #-15]
+	10854:       e1a02003        mov     r2, r3
+	10858:       e51b3008        ldr     r3, [fp, #-8]
+	1085c:       e283300e        add     r3, r3, #14
+	10860:       e1520003        cmp     r2, r3
+	10864:       1a00001e        bne     108e4 <main+0x458>
+	10868:       e55b300e        ldrb    r3, [fp, #-14]
+	1086c:       e1a02003        mov     r2, r3
+	10870:       e51b3008        ldr     r3, [fp, #-8]
+	10874:       e2833012        add     r3, r3, #18
+	10878:       e1520003        cmp     r2, r3
+	1087c:       1a000018        bne     108e4 <main+0x458>
+	10880:       e55b300d        ldrb    r3, [fp, #-13]
+	10884:       e1a02003        mov     r2, r3
+	10888:       e51b3008        ldr     r3, [fp, #-8]
+	1088c:       e283300a        add     r3, r3, #10
+	10890:       e1520003        cmp     r2, r3
+	10894:       1a000012        bne     108e4 <main+0x458>
+	10898:       e55b300c        ldrb    r3, [fp, #-12]
+	1089c:       e1a02003        mov     r2, r3
+	108a0:       e51b3008        ldr     r3, [fp, #-8]
+	108a4:       e283300d        add     r3, r3, #13
+	108a8:       e1520003        cmp     r2, r3
+	108ac:       1a00000c        bne     108e4 <main+0x458>
+	108b0:       e55b300b        ldrb    r3, [fp, #-11]
+	108b4:       e1a02003        mov     r2, r3
+	108b8:       e51b3008        ldr     r3, [fp, #-8]
+	108bc:       e2433001        sub     r3, r3, #1
+	108c0:       e1520003        cmp     r2, r3
+	108c4:       1a000006        bne     108e4 <main+0x458>
+	108c8:       e59f0034        ldr     r0, [pc, #52]   ; 10904 <main+0x478>
+	108cc:       ebfffea6        bl      1036c <puts@plt>
+	108d0:       e24b3040        sub     r3, fp, #64     ; 0x40
+	108d4:       e1a01003        mov     r1, r3
+	108d8:       e59f0028        ldr     r0, [pc, #40]   ; 10908 <main+0x47c>
+	108dc:       ebfffe9c        bl      10354 <printf@plt>
+	108e0:       ea000001        b       108ec <main+0x460>
+	108e4:       e59f0020        ldr     r0, [pc, #32]   ; 1090c <main+0x480>
+	108e8:       ebfffe9f        bl      1036c <puts@plt>
+	108ec:       e3a03000        mov     r3, #0
+	108f0:       e1a00003        mov     r0, r3
+	108f4:       e24bd004        sub     sp, fp, #4
+	108f8:       e8bd8800        pop     {fp, pc}
+	108fc:       00010980        .word   0x00010980
+	10900:       00021030        .word   0x00021030
+	10904:       00010994        .word   0x00010994
+	10908:       000109a0        .word   0x000109a0
+	1090c:       000109b0        .word   0x000109b0
+
+
+	~~ 中略 ~~
+
+user01@raspberrypi:~/question_files/READ_only_READ $</code></pre>
+	</section>
+	<section>
+		gdbでも同じことができる
+		<pre><code data-line-numbers="">user01@raspberrypi:~/question_files/READ_only_READ $ gdb ./chall
+GNU gdb (Raspbian 8.2.1-2) 8.2.1
+Copyright (C) 2018 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+Type "show copying" and "show warranty" for details.
+This GDB was configured as "arm-linux-gnueabihf".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+    <http://www.gnu.org/software/gdb/documentation/>.
+
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from ./chall...(no debugging symbols found)...done.
+(gdb) break main
+Breakpoint 1 at 0x10498
+(gdb) run
+Starting program: /home/user01/question_files/READ_only_READ/chall
+
+Breakpoint 1, 0x00010498 in main ()
+(gdb) disas
+Dump of assembler code for function main:
+	0x0001048c <+0>:     push    {r11, lr}
+	0x00010490 <+4>:     add     r11, sp, #4
+	0x00010494 <+8>:     sub     sp, sp, #64     ; 0x40
+=> 0x00010498 <+12>:    mov     r3, #101        ; 0x65
+	0x0001049c <+16>:    str     r3, [r11, #-8]
+	0x000104a0 <+20>:    ldr     r3, [r11, #-8]
+	0x000104a4 <+24>:    uxtb    r3, r3
+	0x000104a8 <+28>:    sub     r3, r3, #34     ; 0x22
+	0x000104ac <+32>:    uxtb    r3, r3
+	0x000104b0 <+36>:    strb    r3, [r11, #-64] ; 0xffffffc0
+	0x000104b4 <+40>:    ldr     r3, [r11, #-8]
+	0x000104b8 <+44>:    uxtb    r3, r3
+	0x000104bc <+48>:    sub     r3, r3, #18
+	0x000104c0 <+52>:    uxtb    r3, r3
+	0x000104c4 <+56>:    strb    r3, [r11, #-63] ; 0xffffffc1
+	0x000104c8 <+60>:    ldr     r3, [r11, #-8]
+	0x000104cc <+64>:    uxtb    r3, r3
+	0x000104d0 <+68>:    sub     r3, r3, #17
+	0x000104d4 <+72>:    uxtb    r3, r3
+	0x000104d8 <+76>:    strb    r3, [r11, #-62] ; 0xffffffc2
+	0x000104dc <+80>:    ldr     r3, [r11, #-8]
+	0x000104e0 <+84>:    uxtb    r3, r3
+	0x000104e4 <+88>:    add     r3, r3, #22
+	0x000104e8 <+92>:    uxtb    r3, r3
+	0x000104ec <+96>:    strb    r3, [r11, #-61] ; 0xffffffc3
+	0x000104f0 <+100>:   ldr     r3, [r11, #-8]
+	0x000104f4 <+104>:   uxtb    r3, r3
+--Type <RET> for more, q to quit, c to continue without paging--
+	0x000104f8 <+108>:   sub     r3, r3, #14
+	0x000104fc <+112>:   uxtb    r3, r3
+	0x00010500 <+116>:   strb    r3, [r11, #-60] ; 0xffffffc4
+	0x00010504 <+120>:   ldr     r3, [r11, #-8]
+	0x00010508 <+124>:   uxtb    r3, r3
+	0x0001050c <+128>:   add     r3, r3, #3
+	0x00010510 <+132>:   uxtb    r3, r3
+	0x00010514 <+136>:   strb    r3, [r11, #-59] ; 0xffffffc5
+	0x00010518 <+140>:   ldr     r3, [r11, #-8]
+	0x0001051c <+144>:   uxtb    r3, r3
+	0x00010520 <+148>:   sub     r3, r3, #4
+	0x00010524 <+152>:   uxtb    r3, r3
+	0x00010528 <+156>:   strb    r3, [r11, #-58] ; 0xffffffc6
+	0x0001052c <+160>:   ldr     r3, [r11, #-8]
+	0x00010530 <+164>:   uxtb    r3, r3
+	0x00010534 <+168>:   add     r3, r3, #15
+	0x00010538 <+172>:   uxtb    r3, r3
+	0x0001053c <+176>:   strb    r3, [r11, #-57] ; 0xffffffc7
+	0x00010540 <+180>:   ldr     r3, [r11, #-8]
+	0x00010544 <+184>:   uxtb    r3, r3
+	0x00010548 <+188>:   sub     r3, r3, #17
+	0x0001054c <+192>:   uxtb    r3, r3
+	0x00010550 <+196>:   strb    r3, [r11, #-56] ; 0xffffffc8
+	0x00010554 <+200>:   ldr     r3, [r11, #-8]
+	0x00010558 <+204>:   uxtb    r3, r3
+	0x0001055c <+208>:   add     r3, r3, #3
+	0x00010560 <+212>:   uxtb    r3, r3
+	0x00010564 <+216>:   strb    r3, [r11, #-55] ; 0xffffffc9
+--Type <RET> for more, q to quit, c to continue without paging--
+	0x00010568 <+220>:   ldr     r3, [r11, #-8]
+	0x0001056c <+224>:   uxtb    r3, r3
+	0x00010570 <+228>:   strb    r3, [r11, #-54] ; 0xffffffca
+	0x00010574 <+232>:   ldr     r3, [r11, #-8]
+	0x00010578 <+236>:   uxtb    r3, r3
+	0x0001057c <+240>:   sub     r3, r3, #29
+	0x00010580 <+244>:   uxtb    r3, r3
+	0x00010584 <+248>:   strb    r3, [r11, #-53] ; 0xffffffcb
+	0x00010588 <+252>:   ldr     r3, [r11, #-8]
+	0x0001058c <+256>:   uxtb    r3, r3
+	0x00010590 <+260>:   strb    r3, [r11, #-52] ; 0xffffffcc
+	0x00010594 <+264>:   ldr     r3, [r11, #-8]
+	0x00010598 <+268>:   uxtb    r3, r3
+	0x0001059c <+272>:   add     r3, r3, #7
+	0x000105a0 <+276>:   uxtb    r3, r3
+	0x000105a4 <+280>:   strb    r3, [r11, #-51] ; 0xffffffcd
+	0x000105a8 <+284>:   ldr     r3, [r11, #-8]
+	0x000105ac <+288>:   uxtb    r3, r3
+	0x000105b0 <+292>:   add     r3, r3, #7
+	0x000105b4 <+296>:   uxtb    r3, r3
+	0x000105b8 <+300>:   strb    r3, [r11, #-50] ; 0xffffffce
+	0x000105bc <+304>:   ldr     r3, [r11, #-8]
+	0x000105c0 <+308>:   uxtb    r3, r3
+	0x000105c4 <+312>:   sub     r3, r3, #38     ; 0x26
+	0x000105c8 <+316>:   uxtb    r3, r3
+	0x000105cc <+320>:   strb    r3, [r11, #-49] ; 0xffffffcf
+	0x000105d0 <+324>:   ldr     r3, [r11, #-8]
+	0x000105d4 <+328>:   uxtb    r3, r3
+--Type <RET> for more, q to quit, c to continue without paging--
+	0x000105d8 <+332>:   sub     r3, r3, #28
+	0x000105dc <+336>:   uxtb    r3, r3
+	0x000105e0 <+340>:   strb    r3, [r11, #-48] ; 0xffffffd0
+	0x000105e4 <+344>:   ldr     r3, [r11, #-8]
+	0x000105e8 <+348>:   uxtb    r3, r3
+	0x000105ec <+352>:   sub     r3, r3, #62     ; 0x3e
+	0x000105f0 <+356>:   uxtb    r3, r3
+	0x000105f4 <+360>:   strb    r3, [r11, #-47] ; 0xffffffd1
+	0x000105f8 <+364>:   ldr     r3, [r11, #-8]
+	0x000105fc <+368>:   uxtb    r3, r3
+	0x00010600 <+372>:   add     r3, r3, #17
+	0x00010604 <+376>:   uxtb    r3, r3
+	0x00010608 <+380>:   strb    r3, [r11, #-46] ; 0xffffffd2
+	0x0001060c <+384>:   ldr     r3, [r11, #-8]
+	0x00010610 <+388>:   uxtb    r3, r3
+	0x00010614 <+392>:   strb    r3, [r11, #-45] ; 0xffffffd3
+	0x00010618 <+396>:   ldr     r3, [r11, #-8]
+	0x0001061c <+400>:   uxtb    r3, r3
+	0x00010620 <+404>:   sub     r3, r3, #35     ; 0x23
+	0x00010624 <+408>:   uxtb    r3, r3
+	0x00010628 <+412>:   strb    r3, [r11, #-44] ; 0xffffffd4
+	0x0001062c <+416>:   ldr     r3, [r11, #-8]
+	0x00010630 <+420>:   uxtb    r3, r3
+	0x00010634 <+424>:   strb    r3, [r11, #-43] ; 0xffffffd5
+	0x00010638 <+428>:   ldr     r3, [r11, #-8]
+	0x0001063c <+432>:   uxtb    r3, r3
+	0x00010640 <+436>:   strb    r3, [r11, #-42] ; 0xffffffd6
+	0x00010644 <+440>:   ldr     r3, [r11, #-8]
+--Type <RET> for more, q to quit, c to continue without paging--
+	0x00010648 <+444>:   uxtb    r3, r3
+	0x0001064c <+448>:   add     r3, r3, #9
+	0x00010650 <+452>:   uxtb    r3, r3
+	0x00010654 <+456>:   strb    r3, [r11, #-41] ; 0xffffffd7
+	0x00010658 <+460>:   ldr     r3, [r11, #-8]
+	0x0001065c <+464>:   uxtb    r3, r3
+	0x00010660 <+468>:   sub     r3, r3, #18
+	0x00010664 <+472>:   uxtb    r3, r3
+	0x00010668 <+476>:   strb    r3, [r11, #-40] ; 0xffffffd8
+	0x0001066c <+480>:   ldr     r3, [r11, #-8]
+	0x00010670 <+484>:   uxtb    r3, r3
+	0x00010674 <+488>:   add     r3, r3, #11
+	0x00010678 <+492>:   uxtb    r3, r3
+	0x0001067c <+496>:   strb    r3, [r11, #-39] ; 0xffffffd9
+	0x00010680 <+500>:   ldr     r3, [r11, #-8]
+	0x00010684 <+504>:   uxtb    r3, r3
+	0x00010688 <+508>:   add     r3, r3, #10
+	0x0001068c <+512>:   uxtb    r3, r3
+	0x00010690 <+516>:   strb    r3, [r11, #-38] ; 0xffffffda
+	0x00010694 <+520>:   ldr     r3, [r11, #-8]
+	0x00010698 <+524>:   uxtb    r3, r3
+	0x0001069c <+528>:   add     r3, r3, #15
+	0x000106a0 <+532>:   uxtb    r3, r3
+	0x000106a4 <+536>:   strb    r3, [r11, #-37] ; 0xffffffdb
+	0x000106a8 <+540>:   ldr     r3, [r11, #-8]
+	0x000106ac <+544>:   uxtb    r3, r3
+	0x000106b0 <+548>:   add     r3, r3, #15
+	0x000106b4 <+552>:   uxtb    r3, r3
+--Type <RET> for more, q to quit, c to continue without paging--
+	0x000106b8 <+556>:   strb    r3, [r11, #-36] ; 0xffffffdc
+	0x000106bc <+560>:   ldr     r3, [r11, #-8]
+	0x000106c0 <+564>:   uxtb    r3, r3
+	0x000106c4 <+568>:   strb    r3, [r11, #-35] ; 0xffffffdd
+	0x000106c8 <+572>:   ldr     r3, [r11, #-8]
+	0x000106cc <+576>:   uxtb    r3, r3
+	0x000106d0 <+580>:   sub     r3, r3, #1
+	0x000106d4 <+584>:   uxtb    r3, r3
+	0x000106d8 <+588>:   strb    r3, [r11, #-34] ; 0xffffffde
+	0x000106dc <+592>:   ldr     r3, [r11, #-8]
+	0x000106e0 <+596>:   uxtb    r3, r3
+	0x000106e4 <+600>:   sub     r3, r3, #68     ; 0x44
+	0x000106e8 <+604>:   uxtb    r3, r3
+	0x000106ec <+608>:   strb    r3, [r11, #-33] ; 0xffffffdf
+	0x000106f0 <+612>:   ldr     r3, [r11, #-8]
+	0x000106f4 <+616>:   uxtb    r3, r3
+	0x000106f8 <+620>:   add     r3, r3, #24
+	0x000106fc <+624>:   uxtb    r3, r3
+	0x00010700 <+628>:   strb    r3, [r11, #-32] ; 0xffffffe0
+	0x00010704 <+632>:   ldr     r0, [pc, #496]  ; 0x108fc <main+1136>
+	0x00010708 <+636>:   bl      0x10354 <printf@plt>
+	0x0001070c <+640>:   ldr     r3, [pc, #492]  ; 0x10900 <main+1140>
+	0x00010710 <+644>:   ldr     r2, [r3]
+	0x00010714 <+648>:   sub     r3, r11, #28
+	0x00010718 <+652>:   mov     r1, #19
+	0x0001071c <+656>:   mov     r0, r3
+	0x00010720 <+660>:   bl      0x10360 <fgets@plt>
+	0x00010724 <+664>:   ldrb    r3, [r11, #-28] ; 0xffffffe4
+--Type <RET> for more, q to quit, c to continue without paging--
+	0x00010728 <+668>:   mov     r2, r3
+	0x0001072c <+672>:   ldr     r3, [r11, #-8]
+	0x00010730 <+676>:   cmp     r3, r2
+	0x00010734 <+680>:   bne     0x108e4 <main+1112>
+	0x00010738 <+684>:   ldrb    r3, [r11, #-27] ; 0xffffffe5
+	0x0001073c <+688>:   mov     r2, r3
+	0x00010740 <+692>:   ldr     r3, [r11, #-8]
+	0x00010744 <+696>:   add     r3, r3, #19
+	0x00010748 <+700>:   cmp     r2, r3
+	0x0001074c <+704>:   bne     0x108e4 <main+1112>
+	0x00010750 <+708>:   ldrb    r3, [r11, #-26] ; 0xffffffe6
+	0x00010754 <+712>:   mov     r2, r3
+	0x00010758 <+716>:   ldr     r3, [r11, #-8]
+	0x0001075c <+720>:   sub     r3, r3, #2
+	0x00010760 <+724>:   cmp     r2, r3
+	0x00010764 <+728>:   bne     0x108e4 <main+1112>
+	0x00010768 <+732>:   ldrb    r3, [r11, #-25] ; 0xffffffe7
+	0x0001076c <+736>:   mov     r2, r3
+	0x00010770 <+740>:   ldr     r3, [r11, #-8]
+	0x00010774 <+744>:   cmp     r3, r2
+	0x00010778 <+748>:   bne     0x108e4 <main+1112>
+	0x0001077c <+752>:   ldrb    r3, [r11, #-24] ; 0xffffffe8
+	0x00010780 <+756>:   mov     r2, r3
+	0x00010784 <+760>:   ldr     r3, [r11, #-8]
+	0x00010788 <+764>:   add     r3, r3, #7
+	0x0001078c <+768>:   cmp     r2, r3
+	0x00010790 <+772>:   bne     0x108e4 <main+1112>
+	0x00010794 <+776>:   ldrb    r3, [r11, #-23] ; 0xffffffe9
+--Type <RET> for more, q to quit, c to continue without paging--
+	0x00010798 <+780>:   mov     r2, r3
+	0x0001079c <+784>:   ldr     r3, [r11, #-8]
+	0x000107a0 <+788>:   add     r3, r3, #7
+	0x000107a4 <+792>:   cmp     r2, r3
+	0x000107a8 <+796>:   bne     0x108e4 <main+1112>
+	0x000107ac <+800>:   ldrb    r3, [r11, #-22] ; 0xffffffea
+	0x000107b0 <+804>:   mov     r2, r3
+	0x000107b4 <+808>:   ldr     r3, [r11, #-8]
+	0x000107b8 <+812>:   cmp     r3, r2
+	0x000107bc <+816>:   bne     0x108e4 <main+1112>
+	0x000107c0 <+820>:   ldrb    r3, [r11, #-21] ; 0xffffffeb
+	0x000107c4 <+824>:   mov     r2, r3
+	0x000107c8 <+828>:   ldr     r3, [r11, #-8]
+	0x000107cc <+832>:   add     r3, r3, #9
+	0x000107d0 <+836>:   cmp     r2, r3
+	0x000107d4 <+840>:   bne     0x108e4 <main+1112>
+	0x000107d8 <+844>:   ldrb    r3, [r11, #-20] ; 0xffffffec
+	0x000107dc <+848>:   mov     r2, r3
+	0x000107e0 <+852>:   ldr     r3, [r11, #-8]
+	0x000107e4 <+856>:   add     r3, r3, #15
+	0x000107e8 <+860>:   cmp     r2, r3
+	0x000107ec <+864>:   bne     0x108e4 <main+1112>
+	0x000107f0 <+868>:   ldrb    r3, [r11, #-19] ; 0xffffffed
+	0x000107f4 <+872>:   mov     r2, r3
+	0x000107f8 <+876>:   ldr     r3, [r11, #-8]
+	0x000107fc <+880>:   sub     r3, r3, #6
+	0x00010800 <+884>:   cmp     r2, r3
+	0x00010804 <+888>:   bne     0x108e4 <main+1112>
+--Type <RET> for more, q to quit, c to continue without paging--
+	0x00010808 <+892>:   ldrb    r3, [r11, #-18] ; 0xffffffee
+	0x0001080c <+896>:   mov     r2, r3
+	0x00010810 <+900>:   ldr     r3, [r11, #-8]
+	0x00010814 <+904>:   add     r3, r3, #11
+	0x00010818 <+908>:   cmp     r2, r3
+	0x0001081c <+912>:   bne     0x108e4 <main+1112>
+	0x00010820 <+916>:   ldrb    r3, [r11, #-17] ; 0xffffffef
+	0x00010824 <+920>:   mov     r2, r3
+	0x00010828 <+924>:   ldr     r3, [r11, #-8]
+	0x0001082c <+928>:   sub     r3, r3, #4
+	0x00010830 <+932>:   cmp     r2, r3
+	0x00010834 <+936>:   bne     0x108e4 <main+1112>
+	0x00010838 <+940>:   ldrb    r3, [r11, #-16]
+	0x0001083c <+944>:   mov     r2, r3
+	0x00010840 <+948>:   ldr     r3, [r11, #-8]
+	0x00010844 <+952>:   add     r3, r3, #14
+	0x00010848 <+956>:   cmp     r2, r3
+	0x0001084c <+960>:   bne     0x108e4 <main+1112>
+	0x00010850 <+964>:   ldrb    r3, [r11, #-15]
+	0x00010854 <+968>:   mov     r2, r3
+	0x00010858 <+972>:   ldr     r3, [r11, #-8]
+	0x0001085c <+976>:   add     r3, r3, #14
+	0x00010860 <+980>:   cmp     r2, r3
+	0x00010864 <+984>:   bne     0x108e4 <main+1112>
+	0x00010868 <+988>:   ldrb    r3, [r11, #-14]
+	0x0001086c <+992>:   mov     r2, r3
+	0x00010870 <+996>:   ldr     r3, [r11, #-8]
+	0x00010874 <+1000>:  add     r3, r3, #18
+--Type <RET> for more, q to quit, c to continue without paging--
+	0x00010878 <+1004>:  cmp     r2, r3
+	0x0001087c <+1008>:  bne     0x108e4 <main+1112>
+	0x00010880 <+1012>:  ldrb    r3, [r11, #-13]
+	0x00010884 <+1016>:  mov     r2, r3
+	0x00010888 <+1020>:  ldr     r3, [r11, #-8]
+	0x0001088c <+1024>:  add     r3, r3, #10
+	0x00010890 <+1028>:  cmp     r2, r3
+	0x00010894 <+1032>:  bne     0x108e4 <main+1112>
+	0x00010898 <+1036>:  ldrb    r3, [r11, #-12]
+	0x0001089c <+1040>:  mov     r2, r3
+	0x000108a0 <+1044>:  ldr     r3, [r11, #-8]
+	0x000108a4 <+1048>:  add     r3, r3, #13
+	0x000108a8 <+1052>:  cmp     r2, r3
+	0x000108ac <+1056>:  bne     0x108e4 <main+1112>
+	0x000108b0 <+1060>:  ldrb    r3, [r11, #-11]
+	0x000108b4 <+1064>:  mov     r2, r3
+	0x000108b8 <+1068>:  ldr     r3, [r11, #-8]
+	0x000108bc <+1072>:  sub     r3, r3, #1
+	0x000108c0 <+1076>:  cmp     r2, r3
+	0x000108c4 <+1080>:  bne     0x108e4 <main+1112>
+	0x000108c8 <+1084>:  ldr     r0, [pc, #52]   ; 0x10904 <main+1144>
+	0x000108cc <+1088>:  bl      0x1036c <puts@plt>
+	0x000108d0 <+1092>:  sub     r3, r11, #64    ; 0x40
+	0x000108d4 <+1096>:  mov     r1, r3
+	0x000108d8 <+1100>:  ldr     r0, [pc, #40]   ; 0x10908 <main+1148>
+	0x000108dc <+1104>:  bl      0x10354 <printf@plt>
+	0x000108e0 <+1108>:  b       0x108ec <main+1120>
+	0x000108e4 <+1112>:  ldr     r0, [pc, #32]   ; 0x1090c <main+1152>
+--Type <RET> for more, q to quit, c to continue without paging--
+	0x000108e8 <+1116>:  bl      0x1036c <puts@plt>
+	0x000108ec <+1120>:  mov     r3, #0
+	0x000108f0 <+1124>:  mov     r0, r3
+	0x000108f4 <+1128>:  sub     sp, r11, #4
+	0x000108f8 <+1132>:  pop     {r11, pc}
+	0x000108fc <+1136>:  andeq   r0, r1, r0, lsl #19
+	0x00010900 <+1140>:  andeq   r1, r2, r0, lsr r0
+	0x00010904 <+1144>:  muleq   r1, r4, r9
+	0x00010908 <+1148>:  andeq   r0, r1, r0, lsr #19
+	0x0001090c <+1152>:                  ; <UNDEFINED> instruction: 0x000109b0
+End of assembler dump.
+(gdb)</code></pre>
+	</section>
+	<section>
+		方法はbreak pointを設置してangrで殴る
+	</section>
+</section>
+
+<section>
+	<section><h2>our secret</h2></section>
+	<section>
+		<h3>問題文</h3>
+		<p class="fragment fade-up">「nc 192.168.50.23 1339」でサーバにログインしてみよう。サーバファイルは「~/our_secret/server.py」にある。</p>
+	</section>
+	<section>
+		サーバにアクセスしてみる
+		<pre><code data-line-numbers="">user01@raspberrypi:~/question_files/our_secret $ nc 192.168.41.4 1339
+-*-*-*-*-*-*-*-*-*-
+[l] : Login.
+[q] : Quit service.
+Select mode > l
+Enter password > hogehoge
+Password incorrect...
+-*-*-*-*-*-*-*-*-*-
+[l] : Login.
+[q] : Quit service.
+Select mode > q
+Bye...
+^C
+user01@raspberrypi:~/question_files/our_secret $</code></pre>
+	</section>
+	<section>
+		サーバファイルを見てみる
+		<pre><code data-line-numbers="">from Crypto.Util.number import *
+from secret import flag, password
+
+nums = [str(i) for i in range(10)]
+assert all([p in nums for p in password])
+assert len(password) == 11
+
+def mode_l():
+    inp = input("Enter password > ")
+    for i, p in zip(inp, password+"dummy"):
+        i, p = ord(i), ord(p)
+        i = i**(1337*i + 133337 + 73331) * 1337**1337
+        p = p**(1337*p + 133337 + 73331) * 1337**1337
+        if i != p and len(inp):
+            return False
+    else:
+        if len(inp) == len(password):
+            return True
+        else:
+            return False
+
+while True:
+    print("[l] : Login.\n[q] : Quit service.")
+    mode = input("Select mode > ")
+    if mode == "l":
+        if mode_l():
+            print("Login successful!!!")
+            print("\n-*-*-*-*-*-*-*-*-*-*-")
+            print(flag)
+            print("-*-*-*-*-*-*-*-*-*-*-")
+            break
+        else:
+            print("Password incorrect...")
+    if mode == "q":
+        break</code></pre>
+	</section>
+	<section>
+		パスワードを1文字ずつ比較しているところを攻撃する
+	</section>
+	<section>
+		
+	</section>
+</section>
+
+<section>
+	<section><h2>Are_you_super_smart?</h2></section>
+	<section>
+		<h3>問題文</h3>
+		<p class="fragment fade-up">Are you super smart?ファイル「~/question_files/Are_you_super_smart/checker」を実行してみよう。</p>
+	</section>
+</section>
+
+<section>
+	<section><h2>Logical</h2></section>
+	<section>
+		<h3>問題文</h3>
+		<p class="fragment fade-up">暗号化ファイル「~/question_files/Logical/problem.py」とその出力ファイル「output.txt」からフラグを復号してみよう。</p>
+	</section>
+	<section>
+		
+	</section>
+</section>
+
+<section>
+	<section><h2>Capture The Flag</h2></section>
+	<section>
+		<h3>問題文</h3>
+		<p class="fragment fade-up">問題ファイル「~/question_files/Capture_The_Flag」</p>
+	</section>
+</section>
+
+<section>
+	<section>You cannot see it!</section>
+	<section>
+		<pre><code data-trim data-noescape>
+			(def lazy-fib
+			(concat
+			[0 1]
+			((fn rfib [a b]
+					(lazy-cons (+ a b) (rfib b (+ a b)))) 0 1)))
+		</code></pre>
+	</section>
+	<section>
+	<pre><code data-line-numbers="3,8-10">
+		<table>
+		<tr>
+			<td>Apples</td>
+			<td>$1</td>
+			<td>7</td>
+		</tr>
+		<tr>
+			<td>Oranges</td>
+			<td>$2</td>
+			<td>18</td>
+		</tr>
+		</table>
+	</code></pre>
+	</section>
+	<section>
+	<pre><code data-line-numbers="3-5|8-10|13-15">
+	<table>
+	<tr>
+		<td>Apples</td>
+		<td>$1</td>
+		<td>7</td>
+	</tr>
+	<tr>
+		<td>Oranges</td>
+		<td>$2</td>
+		<td>18</td>
+	</tr>
+	<tr>
+		<td>Kiwi</td>
+		<td>$3</td>
+		<td>1</td>
+	</tr>
+	</table>
+	</code></pre>
+	</section>
+</section>
+<section>Slide 2</section>
+	<section>hoge</section>
+<section data-markdown>
+	<script type="text/template">
+		## Page title
+
+		A paragraph with some text and a [link](http://hakim.se).
+		
+		## hoge
+	</script>
+</section>
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+		</script>
+	</body>
+</html>
