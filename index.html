@@ -48,12 +48,13 @@ user01@raspberrypi:~/question_files/you_cannot_see_it $</code></pre>
 		<p class="fragment fade-up">ファイル「~/question_files/gorilla/gorilla」のmd5のハッシュ値を調べよう。</p>
 	</section>
 	<section>
-		<h3>md5sumコマンド</h3>
+		md5sumコマンド
 		<pre><code data-line-numbers="">user01@raspberrypi:~/question_files/gorilla $ ls
 encoded_flag  gorilla  gorilla.sh
 user01@raspberrypi:~/question_files/gorilla $ md5sum gorilla
 0b7cc67bb2f76c0acfebb7d204d7032b  gorilla
 user01@raspberrypi:~/question_files/gorilla $</code></pre>
+		<p class="fragment fade-up">フラグはCST{0b7cc67bb2f76c0acfebb7d204d7032b}となる</p>
 	</section>
 </section>
 
@@ -69,12 +70,12 @@ user01@raspberrypi:~/question_files/gorilla $</code></pre>
 	<section>
 		<h3>Linuxの場合……</h3>
 		nkf, trコマンドでデコードできる
-		<pre><code data-line-numbers=""></code></pre>
-	</section>
-	<section>
-		<h3>ツールの使用</h3>
-		hogehoge
-		hugaemon
+		<pre><code data-line-numbers="1-2|3-4|5-6">user01@raspberrypi:~/question_files/Challenge_Crypto $ cat encoded_flag
+UEZHe3BlbGNnYnRlbmN1fQ0K
+user01@raspberrypi:~/question_files/Challenge_Crypto $ cat encoded_flag | base64 -d
+PFG{pelcgbtencu}
+user01@raspberrypi:~/question_files/Challenge_Crypto $ cat encoded_flag | base64 -d | nkf -r
+CST{cryptograph}</code></pre>
 	</section>
 </section>
 
@@ -86,7 +87,22 @@ user01@raspberrypi:~/question_files/gorilla $</code></pre>
 	</section>
 	<section>
 		<h3>解凍方法</h3>
-		<pre><code data-line-numbers=""></code></pre>
+		<pre><code data-line-numbers="1-7|8-13|14-16">user01@raspberrypi:~/question_files/moveing $ tar zxvf flag.tar.gz
+./moveing/flag/
+./moveing/flag/flag
+tar: ./moveing/flag/flag: time stamp 2021-11-14 10:22:28 is 1389977.717433073 s in the future
+tar: ./moveing/flag: time stamp 2021-11-14 10:22:28 is 1389977.716783802 s in the future
+user01@raspberrypi:~/question_files/moveing $ ls
+flag.tar.gz  moveing
+user01@raspberrypi:~/question_files/moveing $ cd moveing/
+user01@raspberrypi:~/question_files/moveing/moveing $ ls
+flag
+user01@raspberrypi:~/question_files/moveing/moveing $ cd flag/
+user01@raspberrypi:~/question_files/moveing/moveing/flag $ ls
+flag
+user01@raspberrypi:~/question_files/moveing/moveing/flag $ cat flag
+CST{DoNotForgetTheFourOptions!}
+user01@raspberrypi:~/question_files/moveing/moveing/flag $</code></pre>
 	</section>
 </section>
 
@@ -97,10 +113,19 @@ user01@raspberrypi:~/question_files/gorilla $</code></pre>
 		<p class="fragment fade-up">「~/question_files/new_potato/potato」を見てみよう。ファイルの中の文字列は「file1」をとあるハッシュ関数でハッシュ化したものである。そのハッシュ関数を特定し、同じハッシュ関数で「file2」のハッシュ値を求めよう。</p>
 	</section>
 	<section>
-		potatoの中身
+	potatoの中身
+	<pre><code data-line-numbers="">user01@raspberrypi:~/question_files/new_potato $ cat potato
+8a482963caa5f4aead0bc652a83a821b6f65c4d19bc03d42658087c4f6cd6084f2bc09a8727ae0cbb037fc8cb14f47465e3ed87d9e2c3ea750aaa3b58ac35dcf  file1
+user01@raspberrypi:~/question_files/new_potato $</code></pre>
 	</section>
+	出力が16進数128文字
+	<p class="fragment fade-up">512bitの出力を持つhash関数</p>
 	<section>
 		sha512でやる
+		<pre><code>user01@raspberrypi:~/question_files/new_potato $ sha512sum file1 file2
+8a482963caa5f4aead0bc652a83a821b6f65c4d19bc03d42658087c4f6cd6084f2bc09a8727ae0cbb037fc8cb14f47465e3ed87d9e2c3ea750aaa3b58ac35dcf  file1
+a06ad10a877c2377be246a8e3e1408b5573bf5eb7c2516fa2b3cd78ef91ae061d0c2cb6bce67c0f48347d5b5485f702f96349508c238824758854dd486116f46  file2
+user01@raspberrypi:~/question_files/new_potato $</code></pre>
 	</section>
 </section>
 
@@ -108,16 +133,44 @@ user01@raspberrypi:~/question_files/gorilla $</code></pre>
 	<section><h2>Animal_OTAKU</h2></section>
 	<section>
 		<h3>問題文</h3>
-		<p class="fragment fade-up">私が好きな動物を当ててみてください！コマンド「nc localhost hogehoge」を実行してみよう。サーバファイルは「~/question_files/Aminal_OTAKU/server.py」にある。</p>
+		<p class="fragment fade-up">私が好きな動物を当ててみてください！コマンド「nc 192.168.50.23 1338」を実行してみよう。サーバファイルは「~/question_files/Aminal_OTAKU/server.py」にある。</p>
 	</section>
 	<section>
 		とりあえず実行
+		<pre><code data-line-numbers="">user01@raspberrypi:~/question_files/Animal_OTAKU $ nc localhost 1338                                                 09:29:57
+Guess my favorit animal is!
+Enter your answer > hoge  <-  適当に入力
+Incorrect answer……  <-  不正解と言われる</code></pre>
 	</section>
 	<section>
 		サーバファイルを読む
+		<pre><code data-line-numbers="5">from flag import flag
+
+animals = open("animals", "r").read()
+animals = animals.split("\n")
+ans = animals[140]  <- 答えが格納されている
+
+print("Guess my favorit animal is!")
+inp = input("Enter your answer > ")
+if inp == ans:
+    print("Correct answer!")
+    print(flag)
+else:
+    print("Incorrect answer……")
+</code></pre>
 	</section>
 	<section>
 		添字に対応する動物を検索する
+		<pre><code data-line-numbers="">user01@raspberrypi:~/question_files/Animal_OTAKU $ cat -n animals | grep 141                                                      09:35:50
+	141  frog</code></pre>
+	</section>
+	<section>
+		あとは入力するだけ
+		<pre><code data-markdown="1-2|3|4-5">user01@raspberrypi:~/question_files/Animal_OTAKU $  nc localhost 1338                                                 09:31:11
+Guess my favorit animal is!
+Enter your answer > frog  <- 入力
+Correct answer!
+CST{ByTheWay,ILikeFrogs}</code></pre>
 	</section>
 </section>
 
@@ -1756,57 +1809,7 @@ while True:
 	</section>
 </section>
 
-<section>
-	<section>You cannot see it!</section>
-	<section>
-		<pre><code data-trim data-noescape>
-			(def lazy-fib
-			(concat
-			[0 1]
-			((fn rfib [a b]
-					(lazy-cons (+ a b) (rfib b (+ a b)))) 0 1)))
-		</code></pre>
-	</section>
-	<section>
-	<pre><code data-line-numbers="3,8-10">
-		<table>
-		<tr>
-			<td>Apples</td>
-			<td>$1</td>
-			<td>7</td>
-		</tr>
-		<tr>
-			<td>Oranges</td>
-			<td>$2</td>
-			<td>18</td>
-		</tr>
-		</table>
-	</code></pre>
-	</section>
-	<section>
-	<pre><code data-line-numbers="3-5|8-10|13-15">
-	<table>
-	<tr>
-		<td>Apples</td>
-		<td>$1</td>
-		<td>7</td>
-	</tr>
-	<tr>
-		<td>Oranges</td>
-		<td>$2</td>
-		<td>18</td>
-	</tr>
-	<tr>
-		<td>Kiwi</td>
-		<td>$3</td>
-		<td>1</td>
-	</tr>
-	</table>
-	</code></pre>
-	</section>
-</section>
-<section>Slide 2</section>
-	<section>hoge</section>
+
 <section data-markdown>
 	<script type="text/template">
 		## Page title
