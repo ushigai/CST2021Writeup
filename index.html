@@ -118,8 +118,10 @@ user01@raspberrypi:~/question_files/moveing/moveing/flag $</code></pre>
 8a482963caa5f4aead0bc652a83a821b6f65c4d19bc03d42658087c4f6cd6084f2bc09a8727ae0cbb037fc8cb14f47465e3ed87d9e2c3ea750aaa3b58ac35dcf  file1
 user01@raspberrypi:~/question_files/new_potato $</code></pre>
 	</section>
+	<section>
 	出力が16進数128文字
 	<p class="fragment fade-up">512bitの出力を持つhash関数</p>
+	</section>
 	<section>
 		sha512でやる
 		<pre><code>user01@raspberrypi:~/question_files/new_potato $ sha512sum file1 file2
@@ -137,7 +139,7 @@ user01@raspberrypi:~/question_files/new_potato $</code></pre>
 	</section>
 	<section>
 		とりあえず実行
-		<pre><code data-line-numbers="">user01@raspberrypi:~/question_files/Animal_OTAKU $ nc localhost 1338                                                 09:29:57
+		<pre><code data-line-numbers="">user01@raspberrypi:~/question_files/Animal_OTAKU $ nc 192.168.50.23 1338                                                 09:29:57
 Guess my favorit animal is!
 Enter your answer > hoge  <-  適当に入力
 Incorrect answer……  <-  不正解と言われる</code></pre>
@@ -166,7 +168,7 @@ else:
 	</section>
 	<section>
 		あとは入力するだけ
-		<pre><code data-markdown="1-2|3|4-5">user01@raspberrypi:~/question_files/Animal_OTAKU $  nc localhost 1338                                                 09:31:11
+		<pre><code data-line-numbers="1-2|3|4-5">user01@raspberrypi:~/question_files/Animal_OTAKU $  nc localhost 1338                                                 09:31:11
 Guess my favorit animal is!
 Enter your answer > frog  <- 入力
 Correct answer!
@@ -246,7 +248,7 @@ print(s)
 	<section><h2>Strong_Password</h2></section>
 	<section>
 		<h3>問題文</h3>
-		<p class="fragment fade-up">あなたはアプリ「~/question_file/Strong_Password/checker」にログインするためのパスワードを忘れないように、「password.txt」に保存した。さて、ログインすることはできるだろうか。</p>
+		<p class="fragment fade-up">あなたはアプリ「~/question_files/Strong_Password/checker」にログインするためのパスワードを忘れないように、「password.txt」に保存した。さて、ログインすることはできるだろうか。</p>
 	</section>
 	<section>
 		<h3>checkerを実行させてみる</h3>
@@ -257,6 +259,8 @@ user01@raspberrypi:~/question_files/strong_password $</code></pre>
 	</section>
 	<section>
 		password.txtにパスワードがあるらしいが……<br>
+		<pre><code data-line-numbers="">user01@raspberrypi:~/question_files/strong_password $ wc password.txt
+	0      1 136344 password.txt  <-  136344バイトのファイル</code></pre>
 		めっちゃ長い。
 	</section>
 	<section>
@@ -322,7 +326,8 @@ user01@raspberrypi:~/question_files/Rock_Paper_Scissors $</code></pre>
 		必ず負けてしまう
 	</section>
 	<section>
-		<pre><code data-line-numbers="">#!/bin/bash
+		配布ファイルを見てみる
+		<pre><code data-line-numbers="1-9|10-12|14-27">#!/bin/bash
 
 echo "Hey!"
 echo "Let's play Rock-Paper-Scissors togather!"
@@ -351,21 +356,53 @@ elif [ $human = "scissors" ]; then
         #snipped
 fi</code></pre>
 	</section>
-	
+	<section>
+		rock, paper, scissors変数を書き換えればいい
+		<p class="fragment fade-up">cat先のファイルの中身を書き換える</p>
+	</section>
+	<section>
+		<pre><code data-line-numbers="1-2|3|4-5|6|11|12-17">user01@raspberrypi:~/question_files/Rock_Paper_Scissors $ cat ./Data/Main/Assets/aaa
+rock
+user01@raspberrypi:~/question_files/Rock_Paper_Scissors $ echo "paper" > ./Data/Main/Assets/aaa
+user01@raspberrypi:~/question_files/Rock_Paper_Scissors $ cat ./Data/Main/Assets/aaa
+paper
+user01@raspberrypi:~/question_files/Rock_Paper_Scissors $ ./App
+Hey!
+Let's play Rock-Paper-Scissors togather!
+Rock, paper, scissors. One two...
+	Type 'rock' or 'paper' or 'scissors'
+You:scissors
+AI:paper
+YOU WIN!!
+-*-*-*-*-*-*-*-*-*-*-*-
+	Flag is CST{U+270A}
+-*-*-*-*-*-*-*-*-*-*-*-
+user01@raspberrypi:~/question_files/Rock_Paper_Scissors $</code></pre>
+	</section>
 </section>
 
 <section>
 	<section><h2>u-pa-ru-pa-</h2></section>
 	<section>
 		<h3>問題文</h3>
-		<p class="fragment fade-up">ぼく、生まれ変わったらウーパールーパーになりたいんだ。ファイル「~/question_file/u-pa-ru-pa-/u-pa-ru-pa-」を実行してみよう。</p>
+		<p class="fragment fade-up">ぼく、生まれ変わったらウーパールーパーになりたいんだ。ファイル「~/question_file/u-pa-ru-pa-/chall」を実行してみよう。</p>
 	</section>
 	<section>
 		<h3>実行してみる</h3>
-		<pre><code data-line-numbers=""></code></pre>
+		<pre><code data-line-numbers="">user01@raspberrypi:~/question_files/u-pa-ru-pa- $ ./chall
+（何かが高速で表示されている）
+user01@raspberrypi:~/question_files/u-pa-ru-pa- $</code></pre>
 	</section>
 	<section>
 		ファイル実行時の応答を全て書き込む
+		<p class="fragment fade-up">`>`を使用する</p>
+	</section>
+	<section>
+		<pre><code data-line-numbers="">user01@raspberrypi:~/question_files/u-pa-ru-pa- $ ./chall > ans
+user01@raspberrypi:~/question_files/u-pa-ru-pa- $ nano ans
+
+C^M      ^MS^M      ^MT^M      ^M{^M      ^MA^M      ^M_^M      ^Mt^M      ^Mo^M      ^Mo^M      ^M_^M ^Mq^M      ^Mu^M      ^Mi^M      ^Mc^M      ^Mk^M      ^M_^M      ^Mf^M      ^Mi^M      ^Mg^M ^Mh^M      ^Mt^M      ^M_^M      ^Mt^M      ^Mo^M      ^M_^M      ^Mt^M      ^Mh^M      ^Me^M      ^M_^M^M      ^Md^M      ^Me^M      ^Ma^M      ^Mt^M      ^Mh^M      ^M.^M      ^MI^M      ^Mf^M      ^M_^M      ^Mi^M      ^Mt^M      ^M_^M      ^Mw^M      ^Me^M      ^Mr^M      ^Me^M      ^Mn^M      ^M'^M      ^M^Mt^M      ^M_^M      ^Mf^M      ^Mo^M      ^Mr^M      ^M_^M      ^Mm^M      ^Me^M      ^M,^M      ^MI^M^M      ^M'^M      ^Md^M      ^M_^M      ^Mh^M      ^Ma^M      ^Mv^M      ^Me^M      ^M_^M      ^Mm^M      ^Mi^M      ^Ms^M      ^Ms^M      ^Me^M      ^Md^M      ^M_^M      ^Mi^M      ^Mt^M      ^M.^M      ^M^M}^M</code></pre>
+			文字列を消せばフラグを得られる
 	</section>
 </section>
 
@@ -375,21 +412,46 @@ fi</code></pre>
 		<h3>問題文</h3>
 		<p class="fragment fade-up">どこでもDirectoryが「~/question_files/DOKODEMO_directory/DOOR」にあるらしい…</p>
 	</section>
-	<section></section>
+	<section>
+		DOORを見てみると
+		大量のdoor_XXXXがある
+	</section>
+	<section>
+		1個だけ違うものが存在すると考える
+		<pre><code data-line-numbers="1|2-3">user01@raspberrypi:~/question_files/DOKODEMO_directory/DOOR $ ls -la | grep -v drwxr-xr-x
+total 8068
+lrwxrwxrwx    1 user01 user01    17 Oct 27 22:54 door_1055 -> ../FLAG/flag_1055
+user01@raspberrypi:~/question_files/DOKODEMO_directory/DOOR $</code></pre>
+	</section>
+	<section>
+		あとは移動するだけ
+		<pre><code data-line-numbers="1|2-3|4-5">user01@raspberrypi:~/question_files/DOKODEMO_directory/DOOR $ cd door_1055
+user01@raspberrypi:~/question_files/DOKODEMO_directory/DOOR/door_1055 $ ls
+flag
+user01@raspberrypi:~/question_files/DOKODEMO_directory/DOOR/door_1055 $ cat flag
+CST{AnywhereWithADoorAnywhere!!!}
+user01@raspberrypi:~/question_files/DOKODEMO_directory/DOOR/door_1055 $</code></pre>
+	</section>
 </section>
 
 <section>
 	<section><h2>AandBand...</h2></section>
 	<section>
 		<h3>問題文</h3>
-		<p class="fragment fade-up">ディレクトリ「~/question_files/AandBand.../」の中を見てみよう。そこには「original.txt」ファイルと「chall」ディレクトリがある。さらに「chall」ディレクトリの中には「file_0001.txt～file2000.txt」2000個のファイルがある。この2000個のファイルの中で1つだけ「original.txt」と同じファイルがあるらしいが特定することはできるだろうか。答え方：CST{file_○○○○.txt}</p>
+		<p class="fragment fade-up">ディレクトリ「~/question_files/AandBand/」の中を見てみよう。そこには「original.txt」ファイルと「chall」ディレクトリがある。さらに「chall」ディレクトリの中には「file_0001.txt～file2000.txt」2000個のファイルがある。この2000個のファイルの中で1つだけ「original.txt」と同じファイルがあるらしいが特定することはできるだろうか。答え方：CST{file_○○○○.txt}</p>
 	</section>
 	<section>
 		同じファイルを特定するには
 		ハッシュ関数がとても便利
 	</section>
 	<section>
-		<pre><code data-line-numbers=""></code></pre>
+		同一ハッシュ値を返すファイルを特定する
+		<pre><code data-line-numbers="1-2|3|4-5">user01@raspberrypi:~/question_files/AandBand $ md5sum original.txt
+38ea579fa4760ca87d722f59f2f31bb2  original.txt
+user01@raspberrypi:~/question_files/AandBand $ cd chall/
+user01@raspberrypi:~/question_files/AandBand/chall $ md5sum * | grep 38ea579fa4760ca87d722f59f2f31bb2
+38ea579fa4760ca87d722f59f2f31bb2  file_1488.txt
+user01@raspberrypi:~/question_files/AandBand/chall $</code></pre>
 	</section>
 </section>
 
@@ -398,6 +460,32 @@ fi</code></pre>
 	<section>
 		<h3>問題文</h3>
 		<p class="fragment fade-up">ファイル「~/question_files/X_file/JPEG_FILE.jpg」を見てみよう。ファイルはJPEGファイルのようだが、ファイルシグネチャが壊れてしまっているらしい。ファイルシグネチャを復元し、表示することはできるだろうか。</p>
+	</section>
+	<section>
+		ファイルシグネチャを見てみると
+		<p class="fragment fade-up">頭4バイトがXXで埋められている</p>
+		<p class="fragment fade-up">JPEGのシグネチャであるFFD8に置き換える</p>
+	</section>
+	<section>
+		<pre><code data-line-numbers="">from Crypto.Util.number import bytes_to_long as b2l
+from Crypto.Util.number import long_to_bytes as l2b
+
+f = open("JPEG_FILE.jpg", "rb").read()
+
+f = hex(b2l(f))[2:]
+f = "ffd8" + f[4:]
+
+f = l2b(int(f, 16))
+flag = open("flag.jpg", "wb")
+flag.write(f)
+flag.close()
+</code></pre>
+	</section>
+	<section>
+		あとはファイルを見るだけ
+		<div style="text-align:center;">
+			<img src="pic/XFILE_flag.jpg" style="width:40%;"/>
+		</div>
 	</section>
 </section>
 
@@ -868,6 +956,7 @@ do
 done</code></pre>
 	</section>
 	<section>
+		pythonで作成
 		<pre><code data-line-numbers="">ans = ""
 for i in range(1, 101):
     for j in range(501, 601):
@@ -880,7 +969,7 @@ f.close()</code></pre>
 	</section>
 	<section>
 		あとはanswerの内容をcheckerに渡せばいい
-		<pre><code data-line-numbers="">user01@raspberrypi:~/question_files/Are_you_smart $ cat answer | ./checker
+		<pre><code data-line-numbers="1|2-10|12">user01@raspberrypi:~/question_files/Are_you_smart $ cat answer | ./checker
 Q1/10000
 1 + 501 = Q2/10000
 1 + 502 = Q3/10000
@@ -891,10 +980,7 @@ Q1/10000
 100 + 599 = Q10000/10000
 100 + 600 =
 
-CST{JustMemorizeTheAnswersAndYou'reGoodToGo!}
-
-user01@raspberrypi:~/question_files/Are_you_smart $
-		</code></pre>
+CST{JustMemorizeTheAnswersAndYou'reGoodToGo!}</code></pre>
 	</section>
 </section>
 
@@ -978,7 +1064,7 @@ user01@raspberrypi:~/question_files/gorilla $</code></pre>
 	</section>
 	<section>
 		復号には……
-		<p class="fragment fade-up">アスキーコード変換をする必要がある</p>
+		<p class="fragment fade-up">逆順にたどればいい</p>
 	</section>
 	<section>
 		pythonだとchr関数で可能
@@ -1817,7 +1903,7 @@ while True:
 		A paragraph with some text and a [link](http://hakim.se).
 		
 		## hoge
-	</script>
+	</scrip>
 </section>
 			</div>
 		</div>
